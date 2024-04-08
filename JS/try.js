@@ -3,10 +3,10 @@ console.log(tickerCatalogue);
 
 const fetchTickers = async () => {
   /* promise variabel for bruk av Promise.all*/
+  const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
 
   const promises = [];
   const totalRequests = 1;
-  const limitPerRequest = 12;
 
   for (let i = 1; i <= totalRequests; i++) {
     const url = `https://api.coinlore.net/api/tickers/?start=${
@@ -69,5 +69,11 @@ const displayTickers = (tickers) => {
 
 document.getElementById("nameFilter").addEventListener("input", fetchTickers);
 document.getElementById("numberFilter").addEventListener("input", fetchTickers);
+document.getElementById("limitPerRequest").addEventListener("input", () => {
+  if (document.getElementById("limitPerRequest").valueAsNumber > 50) {
+    document.getElementById("limitPerRequest").value = 50;
+  }
+  fetchTickers();
+});
 
 fetchTickers();

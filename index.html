@@ -14,19 +14,15 @@
       <div class="filter-container">
         <input type="text" id="nameFilter" placeholder="Filter by name" />
         <input type="number" id="numberFilter" placeholder="Filter by number" />
+        <input
+          type="number"
+          id="limitPerRequest"
+          placeholder="Limit per request"
+          min="1"
+          value="10"
+        />
       </div>
       <ul class="ticker-catalogue-container" id="ticker-catalogue"></ul>
-      <div id="main__list__element">
-        <template id="main__list__template">
-          <div>
-            <div class="crypto__symbol__icon">ICON</div>
-            <div class="crypto__symbol__index">SYMBOL</div>
-            <div class="crypto__name__index">NAME</div>
-            <div class="crypto__rank__index">RANK</div>
-            <div class="crypto__price__index">PRICE</div>
-          </div>
-        </template>
-      </div>
     </div>
   </body>
   <script src="./JS/try.js" type="module"></script>
