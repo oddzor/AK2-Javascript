@@ -14,15 +14,24 @@ body {
 
 header {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  margin-block: 2rem;
+  margin-block: 1rem;
 }
 
 header > h1 {
   font-size: 2rem;
   text-align: center;
+}
+
+.dynamic-nav > ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.dynamic-nav > ul > li {
+  margin-right: 10px;
 }
 
 .main__page__wrapper {
@@ -58,4 +67,8 @@ ul {
 
 .ticker-catalogue-container > li > p {
   margin-top: 10px;
+}
+
+.error-message {
+  text-align: center;
 }

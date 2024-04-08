@@ -1,33 +1,80 @@
+// Globale variabler
+const limitMaxRequest = 50;
+
+//navigation data
+const navItems = [
+  { text: "Hjem", href: "#home" },
+  { text: "kurv", href: "#basket" },
+  { text: "authors", href: "authors" },
+];
+
+// creating dynamic Nav
+const dynamicNav = document.getElementById("dynamic-nav");
+const navList = document.createElement("ul");
+
+navItems.forEach((item) => {
+  const listItem = document.createElement("li");
+  const link = document.createElement("a");
+  link.textContent = item.text;
+  link.setAttribute("href", item.href);
+  listItem.appendChild(link);
+  navList.appendChild(listItem);
+});
+
+dynamicNav.appendChild(navList);
+
+// Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
+
 const tickerCatalogue = document.getElementById("ticker-catalogue");
+const filterInputs = document.querySelectorAll("#nameFilter, #numberFilter, #limitPerRequest");
 console.log(tickerCatalogue);
 
+// Create error message element
+const errorMessage = document.createElement("div");
+errorMessage.id = "error-message";
+errorMessage.classList.add("error-message");
+errorMessage.textContent = "Failed to fetch data. Please try again later";
+errorMessage.style.display = "block";
+
+//append error message element to body
+document.body.appendChild(errorMessage);
+
 const fetchTickers = async () => {
-  const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
-  const totalRequests = 1;
+  try {
+    const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
+    const totalRequests = 1;
 
-  const promises = [];
-  for (let i = 1; i <= totalRequests; i++) {
-    const url = `https://api.coinlore.net/api/tickers/?start=${
-      (i - 1) * limitPerRequest
-    }&limit=${limitPerRequest}`;
-    const promise = fetch(url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Failed to fetch ${url}: ${res.status}`);
-        }
-        return res.json();
-      })
-      .catch((error) => {
-        console.error(error);
-        return null;
-      });
-    promises.push(promise);
+    const promises = [];
+    for (let i = 1; i <= totalRequests; i++) {
+      const url = `https://api.coinlore.net/api/tickers/?start=${
+        (i - 1) * limitPerRequest
+      }&limit=${limitPerRequest}`;
+
+      const promise = fetch(url)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to fetch ${url}: ${res.status}`);
+          }
+          return res.json();
+        })
+        .catch((error) => {
+          console.error(error);
+          return null;
+        });
+      promises.push(promise);
+    }
+
+    const results = await Promise.all(promises);
+    const tickerInfo = results.flatMap((data) => data.data);
+
+    displayTickers(tickerInfo);
+    //Hide error message if fetching succesfull
+    errorMessage.style.display = "none";
+  } catch (error) {
+    console.error("Error fetching tickers", error);
+    //display error message
+    errorMessage.style.display = "block";
   }
-
-  const results = await Promise.all(promises);
-  const tickerInfo = results.flatMap((data) => data.data);
-
-  displayTickers(tickerInfo);
 };
 
 const displayTickers = (tickers) => {
@@ -59,8 +106,6 @@ const displayTickers = (tickers) => {
   tickerCatalogue.innerHTML = tickerHTMLString;
 };
 
-const limitMaxRequest = 50;
-
 const handleInput = (input) => {
   input.addEventListener("input", () => {
     if (input.id === "limitPerRequest") {
@@ -82,7 +127,6 @@ const handleInput = (input) => {
   });
 };
 
-const filterInputs = document.querySelectorAll("#nameFilter, #numberFilter, #limitPerRequest");
-
 filterInputs.forEach(handleInput);
+
 fetchTickers();
