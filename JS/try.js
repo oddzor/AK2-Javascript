@@ -5,7 +5,7 @@ const limitMaxRequest = 50;
 const navItems = [
   { text: "Hjem", href: "#home" },
   { text: "kurv", href: "#basket" },
-  { text: "authors", href: "authors" },
+  { text: "authors", href: "#authors" },
 ];
 
 // creating dynamic Nav
