@@ -2,34 +2,29 @@ const tickerCatalogue = document.getElementById("ticker-catalogue");
 console.log(tickerCatalogue);
 
 const fetchTickers = async () => {
-  /* promise variabel for bruk av Promise.all*/
   const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
-
-  const promises = [];
   const totalRequests = 1;
 
+  const promises = [];
   for (let i = 1; i <= totalRequests; i++) {
     const url = `https://api.coinlore.net/api/tickers/?start=${
       (i - 1) * limitPerRequest
     }&limit=${limitPerRequest}`;
-    /* bruke forloop for å hente alle tickers til og med et visst tall, i stedet for å hente individuelle tickers*/
     const promise = fetch(url)
       .then((res) => {
         if (!res.ok) {
-          throw new Error(`Feiled to fetch ${url}: ${res.status}`);
-          /* Error håndtering for promise*/
+          throw new Error(`Failed to fetch ${url}: ${res.status}`);
         }
         return res.json();
       })
       .catch((error) => {
         console.error(error);
-        return null; // Catch for bad request
+        return null;
       });
     promises.push(promise);
   }
 
   const results = await Promise.all(promises);
-  // Flatten the array of arrays into a single array of tickers
   const tickerInfo = results.flatMap((data) => data.data);
 
   displayTickers(tickerInfo);
@@ -49,7 +44,6 @@ const displayTickers = (tickers) => {
 
   const tickerHTMLString = filteredTickers
     .map(
-      //viser tickers basert på filterinput
       (unit) =>
         `
         <li class="card">
@@ -61,19 +55,34 @@ const displayTickers = (tickers) => {
         `
     )
     .join("");
-  /* Printer en liste med bilde, alt-text, h2, og p til HTML*/
+
   tickerCatalogue.innerHTML = tickerHTMLString;
 };
 
-// Input field eventlisteners
+const limitMaxRequest = 50;
 
-document.getElementById("nameFilter").addEventListener("input", fetchTickers);
-document.getElementById("numberFilter").addEventListener("input", fetchTickers);
-document.getElementById("limitPerRequest").addEventListener("input", () => {
-  if (document.getElementById("limitPerRequest").valueAsNumber > 50) {
-    document.getElementById("limitPerRequest").value = 50;
-  }
-  fetchTickers();
-});
+const handleInput = (input) => {
+  input.addEventListener("input", () => {
+    if (input.id === "limitPerRequest") {
+      const limitValue = input.valueAsNumber;
+      if (input.value.trim() === "") {
+        console.error("Please enter a valid number (1-50)");
 
+        return;
+      } else if (limitValue < 1) {
+        console.error("Value must be at least 1.");
+        input.value = 1;
+        return;
+      } else if (limitValue > limitMaxRequest) {
+        console.error("Limit exceeded. Setting value to maximum limit.");
+        input.value = limitMaxRequest;
+      }
+    }
+    fetchTickers();
+  });
+};
+
+const filterInputs = document.querySelectorAll("#nameFilter, #numberFilter, #limitPerRequest");
+
+filterInputs.forEach(handleInput);
 fetchTickers();
