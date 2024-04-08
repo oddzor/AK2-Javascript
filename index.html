@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/global.css">
-    <link rel="stylesheet" href="./CSS/index.css">
-    <link href="./general/favicon.ico" rel="icon" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/global.css" />
+    <link rel="stylesheet" href="./CSS/index.css" />
+    <link href="./general/favicon.ico" rel="icon" type="image/x-icon" />
     <title>CRYPSTAD AKADEMIET</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="main__page__wrapper">
-    <header><h1>CRYPSTAD AKADEMIET</h1></header>
-    <div id="main__list__element">
+      <header><h1>CRYPSTAD AKADEMIET</h1></header>
+      <div class="filter-container">
+        <input type="text" id="nameFilter" placeholder="Filter by name" />
+        <input type="number" id="numberFilter" placeholder="Filter by number" />
+      </div>
+      <ul class="ticker-catalogue-container" id="ticker-catalogue"></ul>
+      <div id="main__list__element">
         <template id="main__list__template">
-            <div>
-                <div class="crypto__symbol__icon">ICON</div>
-                <div class="crypto__symbol__index">SYMBOL</div>
-                <div class="crypto__name__index">NAME</div>
-                <div class="crypto__rank__index">RANK</div>
-                <div class="crypto__price__index">PRICE</div>
-            </div>
+          <div>
+            <div class="crypto__symbol__icon">ICON</div>
+            <div class="crypto__symbol__index">SYMBOL</div>
+            <div class="crypto__name__index">NAME</div>
+            <div class="crypto__rank__index">RANK</div>
+            <div class="crypto__price__index">PRICE</div>
+          </div>
         </template>
+      </div>
     </div>
-    </div>
-</body>
-<script src="./JS/script.js" type="module"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+  <script src="./JS/try.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>
