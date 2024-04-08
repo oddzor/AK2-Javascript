@@ -55,3 +55,7 @@ ul {
   flex-direction: column;
   justify-content: center;
 }
+
+.ticker-catalogue-container > li > p {
+  margin-top: 10px;
+}

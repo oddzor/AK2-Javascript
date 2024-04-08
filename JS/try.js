@@ -6,7 +6,7 @@ const fetchTickers = async () => {
 
   const promises = [];
   const totalRequests = 1;
-  const limitPerRequest = 10;
+  const limitPerRequest = 12;
 
   for (let i = 1; i <= totalRequests; i++) {
     const url = `https://api.coinlore.net/api/tickers/?start=${
