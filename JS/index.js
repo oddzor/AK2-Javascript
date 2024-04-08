@@ -1,28 +1,6 @@
 // Globale variabler
 const limitMaxRequest = 50;
 
-//navigation data
-const navItems = [
-  { text: "Hjem", href: "#home" },
-  { text: "kurv", href: "#basket" },
-  { text: "authors", href: "#authors" },
-];
-
-// creating dynamic Nav
-const dynamicNav = document.getElementById("dynamic-nav");
-const navList = document.createElement("ul");
-
-navItems.forEach((item) => {
-  const listItem = document.createElement("li");
-  const link = document.createElement("a");
-  link.textContent = item.text;
-  link.setAttribute("href", item.href);
-  listItem.appendChild(link);
-  navList.appendChild(listItem);
-});
-
-dynamicNav.appendChild(navList);
-
 // Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
 
 const tickerCatalogue = document.getElementById("ticker-catalogue");
