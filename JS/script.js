@@ -11,7 +11,7 @@ async function getCryptoData() {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        data.data.forEach(crypto => {
+        data.data.forEach(crypto = {
             addCrypto(crypto);
         });
     } catch (error) {
@@ -24,14 +24,44 @@ async function getCryptoData() {
 // Populating elements on index.html
 
 function addCrypto (crypto) {
-    const listElement = document.getElementById("main__list__element");
-    const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
+    const indexElement = document.getElementById("main__list__element");
+    const indexTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
-    listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
-    listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
-    listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-    listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
-    listElement.appendChild(listTemplate);
+    indexTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
+    indexTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
+    indexTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
+    indexTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+    indexElement.appendChild(listTemplate);
+
+ 
+}
+
+
+function cryptoInformationMain (crypto) {
+    const rankElement = document.getElementById("crypto__rank__main");
+    const iconElement = document.getElementById("crypto__icon__main");
+    const nameElement = document.getElementById("crypto__name__main");
+    const symbolElement = document.getElementById("crypto__symbol__main");
+    const priceElement = document.getElementById("crypto__price__main");
+    const change1hElement = document.getElementById("crypto__change1h");
+    const change24hElement = document.getElementById("crypto__change24h");
+    const change1dElement = document.getElementById("crypto__change1d");
+    const marketcapElement = document.getElementById("crypto__marketcap");
+    const volume24hElement = document.getElementById("crypto__volume24h");
+    const csupplyElement = document.getElementById("crypto__csupply");
+    const tsupplyElement = document.getElementById("crypto__tsupply");
+    const msupplyElement = document.getElementById("crypto__msupply");
+
+rankElement.textContent = crypto.rank;
+
+
+//    "crypto__marketcap"
+//    "crypto__volume24h"
+//    "crypto__csupply"
+//    "crypto__tsupply"
+//    "crypto__msupply"
+
+    cryptoInformation(crypto);
 }
 
 
