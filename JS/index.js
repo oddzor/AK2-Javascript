@@ -46,7 +46,7 @@ const fetchTickers = async () => {
     const tickerInfo = results.flatMap((data) => data.data);
 
     displayTickers(tickerInfo);
-    //Hide error message if fetching succesfull
+    //Hide error message if fetching successful
     errorMessage.style.display = "none";
   } catch (error) {
     console.error("Error fetching tickers", error);
