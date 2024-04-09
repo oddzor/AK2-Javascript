@@ -43,17 +43,13 @@ async function getCryptoData() {
 
 function addCrypto(crypto) {
   const listElement = document.getElementById("main__list__element");
-  const listTemplate = document
-    .getElementById("main__list__template")
-    .content.cloneNode(true);
+  const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
   // listTemplate.querySelector(".crypto__symbol__icon").textContent = IMPORT ICON DATA SOMEHOW
-  listTemplate.querySelector(".crypto__symbol__index").textContent =
-    crypto.symbol;
+  listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
   listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
   listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-  listTemplate.querySelector(".crypto__price__index").textContent =
-    crypto.price_usd;
+  listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
 
   listElement.appendChild(listTemplate);
 }
@@ -160,5 +156,3 @@ const cryptoAddressList = [
   { symbol: "KCS", address: "0x039B5649A59967e3e936D7471f9c3700100Ee1ab" },
   { symbol: "KLAY", address: "0x393126c0653F49E079500cc0f218A27c793136A0" },
 ];
-
-

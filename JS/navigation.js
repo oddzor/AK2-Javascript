@@ -6,7 +6,7 @@ const navItems = [
   { text: "Hjem", href: "index.html" },
   { text: "kurv", href: "list.html" },
   { text: "authors", href: "main.html" },
-  { text: "Handlevogn", href: "shop.html"},
+  { text: "Handlevogn", href: "shop.html" },
 ];
 
 // creating dynamic Nav
