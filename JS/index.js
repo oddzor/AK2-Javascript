@@ -3,9 +3,7 @@ import { fetchData } from "./api.js";
 // Globale variabler
 const limitMaxRequest = 50;
 const tickerCatalogue = document.getElementById("ticker-catalogue");
-const filterInputs = document.querySelectorAll(
-  "#nameFilter, #numberFilter, #limitPerRequest"
-);
+const filterInputs = document.querySelectorAll("#nameFilter, #numberFilter, #limitPerRequest");
 const errorMessage = document.createElement("div");
 
 // Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
@@ -35,7 +33,10 @@ const displayTickers = (tickers) => {
         <h2>${unit.rank}. ${unit.name}. (${unit.symbol})</h2>
         <p>(Price USD: ${unit.price_usd} $.)</p>
         <p> (Price change last 24 hours: "${unit.percent_change_24h}") </p>
-        
+        <div class="unit-link">
+        <a id="unit-link" href="">Click for info!
+        </a>
+        </div>
         </li>
         `
     )
@@ -77,8 +78,7 @@ const filterData = (tickers, nameFilter, numberFilter) => {
 
 const updateDisplay = async () => {
   try {
-    const limitPerRequest =
-      document.getElementById("limitPerRequest").valueAsNumber;
+    const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
 
     const url = `https://api.coinlore.net/api/tickers/?start=0&limit=${limitPerRequest}`;
 

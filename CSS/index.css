@@ -1,14 +1,18 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error-message {
+  text-align: center;
+}
+
 .card {
   background-color: aliceblue;
   margin: 10px;
   padding: 10px;
   border: solid 3px black;
-}
-
-.filter-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .ticker-catalogue-container {
@@ -21,6 +25,21 @@
   margin-top: 10px;
 }
 
-.error-message {
-  text-align: center;
+.unit-link {
+  margin: 15px 0px 5px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.unit-link > a:hover {
+  background-color: rgba(0, 0, 0, 0.494);
+}
+
+.unit-link > a {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.268);
+  color: black;
+  text-decoration: none;
 }
