@@ -1,3 +1,4 @@
+//Import module from ekstern side
 import { fetchData } from "./api.js";
 
 // Globale variabler
