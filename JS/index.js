@@ -1,62 +1,22 @@
+import { fetchData } from "./api.js";
+
 // Globale variabler
 const limitMaxRequest = 50;
-
-// Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
-
 const tickerCatalogue = document.getElementById("ticker-catalogue");
 const filterInputs = document.querySelectorAll(
   "#nameFilter, #numberFilter, #limitPerRequest"
 );
-console.log(tickerCatalogue);
-
-// Create error message element
 const errorMessage = document.createElement("div");
+
+// Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
+
+// Set up error message element
 errorMessage.id = "error-message";
 errorMessage.classList.add("error-message");
 errorMessage.textContent = "Failed to fetch data. Please try again later";
 errorMessage.style.display = "block";
-
 //append error message element to body
 document.body.appendChild(errorMessage);
-
-const fetchTickers = async () => {
-  try {
-    const limitPerRequest =
-      document.getElementById("limitPerRequest").valueAsNumber;
-    const totalRequests = 1;
-
-    const promises = [];
-    for (let i = 1; i <= totalRequests; i++) {
-      const url = `https://api.coinlore.net/api/tickers/?start=${
-        (i - 1) * limitPerRequest
-      }&limit=${limitPerRequest}`;
-
-      const promise = fetch(url)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`Failed to fetch ${url}: ${res.status}`);
-          }
-          return res.json();
-        })
-        .catch((error) => {
-          console.error(error);
-          return null;
-        });
-      promises.push(promise);
-    }
-
-    const results = await Promise.all(promises);
-    const tickerInfo = results.flatMap((data) => data.data);
-
-    displayTickers(tickerInfo);
-    //Hide error message if fetching succesfull
-    errorMessage.style.display = "none";
-  } catch (error) {
-    console.error("Error fetching tickers", error);
-    //display error message
-    errorMessage.style.display = "block";
-  }
-};
 
 const displayTickers = (tickers) => {
   console.log(tickers);
@@ -64,12 +24,9 @@ const displayTickers = (tickers) => {
   const nameFilter = document.getElementById("nameFilter").value.toLowerCase();
   const numberFilter = document.getElementById("numberFilter").value;
 
-  const filteredTickers = tickers.filter((unit) => {
-    const nameMatch = unit.name.toLowerCase().includes(nameFilter);
-    const numberMatch = unit.id.toString().includes(numberFilter);
-    return nameMatch && numberMatch;
-  });
+  const filteredTickers = filterData(tickers, nameFilter, numberFilter);
 
+  // Generates HTML string for display
   const tickerHTMLString = filteredTickers
     .map(
       (unit) =>
@@ -85,6 +42,7 @@ const displayTickers = (tickers) => {
     .join("");
 
   tickerCatalogue.innerHTML = tickerHTMLString;
+  errorMessage.style.display = "none";
 };
 
 const handleInput = (input) => {
@@ -93,7 +51,6 @@ const handleInput = (input) => {
       const limitValue = input.valueAsNumber;
       if (input.value.trim() === "") {
         console.error("Please enter a valid number (1-50)");
-
         return;
       } else if (limitValue < 1) {
         console.error("Value must be at least 1.");
@@ -104,10 +61,38 @@ const handleInput = (input) => {
         input.value = limitMaxRequest;
       }
     }
-    fetchTickers();
+    updateDisplay();
   });
 };
 
 filterInputs.forEach(handleInput);
 
-fetchTickers();
+const filterData = (tickers, nameFilter, numberFilter) => {
+  return tickers.filter((unit) => {
+    const nameMatch = unit.name.toLowerCase().includes(nameFilter);
+    const numberMatch = unit.id.toString().includes(numberFilter);
+    return nameMatch && numberMatch;
+  });
+};
+
+const updateDisplay = async () => {
+  try {
+    const limitPerRequest =
+      document.getElementById("limitPerRequest").valueAsNumber;
+
+    const url = `https://api.coinlore.net/api/tickers/?start=0&limit=${limitPerRequest}`;
+
+    const results = await fetchData(url);
+
+    if (Array.isArray(results)) {
+      displayTickers(results);
+    } else {
+      console.error("Invalid data format returned from API");
+    }
+  } catch (error) {
+    console.error("Error fetching tickers", error);
+    errorMessage.style.display = "block";
+  }
+};
+
+updateDisplay();
