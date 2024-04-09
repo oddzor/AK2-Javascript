@@ -71,7 +71,7 @@ filterInputs.forEach(handleInput);
 const filterData = (tickers, nameFilter, numberFilter) => {
   return tickers.filter((unit) => {
     const nameMatch = unit.name.toLowerCase().includes(nameFilter);
-    const numberMatch = unit.id.toString().includes(numberFilter);
+    const numberMatch = unit.rank.toString().includes(numberFilter);
     return nameMatch && numberMatch;
   });
 };
