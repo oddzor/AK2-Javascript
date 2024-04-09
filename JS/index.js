@@ -4,7 +4,9 @@ const limitMaxRequest = 50;
 // Retrieves the DOM element with the accompanying ID/queryselector and assigns it to the variable
 
 const tickerCatalogue = document.getElementById("ticker-catalogue");
-const filterInputs = document.querySelectorAll("#nameFilter, #numberFilter, #limitPerRequest");
+const filterInputs = document.querySelectorAll(
+  "#nameFilter, #numberFilter, #limitPerRequest"
+);
 console.log(tickerCatalogue);
 
 // Create error message element
@@ -19,7 +21,8 @@ document.body.appendChild(errorMessage);
 
 const fetchTickers = async () => {
   try {
-    const limitPerRequest = document.getElementById("limitPerRequest").valueAsNumber;
+    const limitPerRequest =
+      document.getElementById("limitPerRequest").valueAsNumber;
     const totalRequests = 1;
 
     const promises = [];
