@@ -31,24 +31,32 @@ header > h1 {
     align-items: center;
 }
 
-#main__list__element {
+#main__list__template {
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 50%;
-    
+    flex-direction: row;
+    background-color: rgb(0, 0, 0);
 }
 
-#main__list__template:nth-child() {
+
+
+.crypto__list__wrapper {
    display: flex;
    flex-direction: row;
+   justify-content: space-between;
+   background-color: whitesmoke;
+   font-size: 3rem;
+}
+
+.crypto__list__wrapper > div {
+    margin-inline: 3rem 1rem;
 
 }
 
-template > div {
-    margin-inline: 2rem;
-    padding-inline: 10rem;
-    background-color: white
+.list__template__info {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 

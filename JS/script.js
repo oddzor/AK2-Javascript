@@ -2,32 +2,11 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     getCryptoData();
-    // cryptoLogo();
 });
-
-// API Integration // 
-
-// Cryptofonts API source and async function to GET data
-
-
-fetch('https://cryptofonts-token-icon-api1.p.rapidapi.com/1/0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0', {
-    method: 'GET',
-    headers: {
-        'X-RapidAPI-Key': '38161647f8mshac755c891c6ebc7p1c5811jsndfa434d77468',
-        'X-RapidAPI-Host': 'cryptofonts-token-icon-api1.p.rapidapi.com'
-    }
-})
-.then(response => response.json())
-.then(data => {
-    addImageToHTML(data[0].logoURI); 
-})
-.catch(error => console.error('Error:', error));
-
-
 
 
 async function getCryptoData() {
-    const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=50";
+    const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
 
     try {
         const response = await fetch(apiUrl);
@@ -48,12 +27,10 @@ function addCrypto (crypto) {
     const listElement = document.getElementById("main__list__element");
     const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
-    // listTemplate.querySelector(".crypto__symbol__icon").textContent = IMPORT ICON DATA SOMEHOW
     listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
     listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
     listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
     listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
-
     listElement.appendChild(listTemplate);
 }
 
@@ -162,10 +139,5 @@ const cryptoAddressList = [
     {name: "KLAY", address: "0x393126c0653F49E079500cc0f218A27c793136A0"},
     
 ];
-
-
-
-
-
 
 
