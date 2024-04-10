@@ -10,25 +10,40 @@
   </head>
   <body>
     <div class="main__page__wrapper">
-      <header>
-        <h1>CRYPSTAD AKADEMIET</h1>
-        <nav class="dynamic-nav" id="dynamic-nav"></nav>
-      </header>
-      <div class="filter-container">
-        <input type="text" id="nameFilter" placeholder="Filter by name" />
-        <input type="number" id="numberFilter" placeholder="Filter by number" />
-        <input
-          type="number"
-          id="limitPerRequest"
-          placeholder="Limit per request"
-          min="1"
-          value="3"
-        />
+
+      <header><h1>CRYPSTAD AKADEMIET</h1></header>
+      <div id="main__list__element">
+        <div class="list__template__info">
+          <div>RANK</div>
+          <div>SYMBOL</div>
+          <div>NAME</div>
+          <div>PRICE</div>
+        </div>
+        <template id="main__list__template">
+          <div class="crypto__list__wrapper">
+            <div class="crypto__rank__index"></div>
+            <div class="crypto__symbol__index"></div>
+            <div class="crypto__name__index"></div>
+            <div class="crypto__price__index"></div>
+          </div>
+        </template>
       </div>
-      <ul class="ticker-catalogue-container" id="ticker-catalogue"></ul>
+      <div class="crypto__additional__info" style="display: none;">
+        <div id="crypto__icon__main"><img></div>
+        <div id="crypto__symbol__main"></div>
+        <div id="crypto__name__main"></div>
+        <div id="crypto__rank__main"></div>
+        <div id="crypto__price__main"></div>
+        <div id="crypto__change1h"></div>
+        <div id="crypto__change24h"></div>
+        <div id="crypto__change1d"></div>
+        <div id="crypto__marketcap"></div>
+        <div id="crypto__volume24h"></div>
+        <div id="crypto__csupply"></div>
+        <div id="crypto__tsupply"></div>
+        <div id="crypto__msupply"></div>
+        <div id="crypto__address"></div>
+      </div>
     </div>
+    <script src="./JS/script.js"></script>
   </body>
-  <script src="./JS/navigation.js"></script>
-  <script src="./JS/index.js" type="module"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</html>
