@@ -11,7 +11,7 @@ async function getCryptoData() {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        data.data.forEach(crypto => {
+        data.data.forEach(crypto = {
             addCrypto(crypto);
         });
     } catch (error) {
@@ -24,8 +24,8 @@ async function getCryptoData() {
 // Populating elements on index.html
 
 function addCrypto (crypto) {
-    const listElement = document.getElementById("main__list__element");
-    const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
+    const indexElement = document.getElementById("main__list__element");
+    const indexTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
     listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
     listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
