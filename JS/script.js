@@ -11,7 +11,7 @@ async function getCryptoData() {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        data.data.forEach(crypto = {
+        data.data.forEach(crypto => {
             addCrypto(crypto);
         });
     } catch (error) {
@@ -24,8 +24,8 @@ async function getCryptoData() {
 // Populating elements on index.html
 
 function addCrypto (crypto) {
-    const indexElement = document.getElementById("main__list__element");
-    const indexTemplate = document.getElementById("main__list__template").content.cloneNode(true);
+    const listElement = document.getElementById("main__list__element");
+    const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
     listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
     listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
@@ -44,7 +44,7 @@ function cryptoInformationMain(cryptoData) {
 
 
 
-  // const iconElement = document.getElementById("crypto__icon__main");
+  const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
   const rankElement = document.getElementById("crypto__rank__main");
   const nameElement = document.getElementById("crypto__name__main");
   const symbolElement = document.getElementById("crypto__symbol__main");
@@ -59,7 +59,6 @@ function cryptoInformationMain(cryptoData) {
   const msupplyElement = document.getElementById("crypto__msupply");
   const addressElement = document.getElementById("crypto__address");
 
-  // iconElement.innerHTML = cryptofontsAPI functionality
   rankElement.innerHTML = cryptoData.rank;
   nameElement.innerHTML = cryptoData.name;
   symbolElement.innerHTML = cryptoData.symbol;
@@ -80,7 +79,49 @@ function cryptoInformationMain(cryptoData) {
 
 }
 
+// Asynchronous function to fetch and display a crypto icon
+async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
+    // Find the crypto address from the cryptoAddressList based on the provided symbol
+    const cryptoObj = cryptoAddressList.find(c => c.name === cryptoSymbol);
 
+    if (!cryptoObj) {
+        console.error("Crypto symbol not found in address list.");
+        return;
+    }
+
+    // Replace the placeholder URL with the actual address from cryptoAddressList
+    const url = `https://cryptofonts-token-icon-api1.p.rapidapi.com/${cryptoObj.address}`;
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23', // Use your actual RapidAPI Key
+            'X-RapidAPI-Host': 'cryptofonts-token-icon-api1.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+        const data = await response.json(); // Parse the JSON response
+
+        // Use the logoURI from the response to set the image source
+        const imageUrl = data.logoURI;
+
+        // Assuming there's an <img> element within the "crypto__icon__main" container
+        const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
+        if (iconElement) {
+            iconElement.src = imageUrl;
+        } else {
+            // If no <img> exists, create one and append it
+            const imgElement = document.createElement("img");
+            imgElement.src = imageUrl;
+            document.getElementById("crypto__icon__main").appendChild(imgElement);
+        }
+
+    } catch (error) {
+        console.error("Error fetching the crypto icon:", error);
+    }
+}
 
 
 const cryptoAddressList = [
