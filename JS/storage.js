@@ -1,87 +1,3 @@
-// Pre-loading DOM 
-
-document.addEventListener("DOMContentLoaded", function() {
-    getCryptoData();
-});
-
-
-async function getCryptoData() {
-    const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
-
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        data.data.forEach(crypto => {
-            addCrypto(crypto);
-        });
-    } catch (error) {
-        console.error("Error retrieving information", error);
-    }
-}
-
-
-
-// Populating elements on index.html
-
-function addCrypto (crypto) {
-    const listElement = document.getElementById("main__list__element");
-    const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
-
-    listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
-    listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
-    listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-    listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
-    listTemplate.querySelector(".crypto__list__wrapper").addEventListener('click', () => {
-      document.getElementById("main__list__element").style.display = "none"; 
-      document.querySelector(".crypto__additional__info").style.display = "block";
-      cryptoInformationMain(crypto); 
-  });
-    listElement.appendChild(listTemplate);
-    
-}
-
-function cryptoInformationMain(cryptoData) {
-
-
-
-  // const iconElement = document.getElementById("crypto__icon__main");
-  const rankElement = document.getElementById("crypto__rank__main");
-  const nameElement = document.getElementById("crypto__name__main");
-  const symbolElement = document.getElementById("crypto__symbol__main");
-  const priceElement = document.getElementById("crypto__price__main");
-  const change1hElement = document.getElementById("crypto__change1h");
-  const change24hElement = document.getElementById("crypto__change24h");
-  const change1dElement = document.getElementById("crypto__change1d");
-  const marketcapElement = document.getElementById("crypto__marketcap");
-  const volume24hElement = document.getElementById("crypto__volume24h");
-  const csupplyElement = document.getElementById("crypto__csupply");
-  const tsupplyElement = document.getElementById("crypto__tsupply");
-  const msupplyElement = document.getElementById("crypto__msupply");
-  const addressElement = document.getElementById("crypto__address");
-
-  // iconElement.innerHTML = cryptofontsAPI functionality
-  rankElement.innerHTML = cryptoData.rank;
-  nameElement.innerHTML = cryptoData.name;
-  symbolElement.innerHTML = cryptoData.symbol;
-  priceElement.innerHTML = cryptoData.price_usd;
-  change1hElement.innerHTML = cryptoData.percent_change_1h;
-  change24hElement.innerHTML = cryptoData.percent_change_24h;
-  change1dElement.innerHTML = cryptoData.percent_change_7d;
-  marketcapElement.innerHTML = cryptoData.market_cap_usd;
-  volume24hElement.innerHTML = cryptoData.volume24;
-  csupplyElement.innerHTML = cryptoData.csupply;
-  tsupplyElement.innerHTML = cryptoData.tsupply;
-  msupplyElement.innerHTML = cryptoData.msupply;
-  addressElement.innerHTML = cryptoAddressList.address;
-
-  const cryptoAddress = cryptoAddressList.find(c => c.symbol === cryptoData.symbol)?.address || 'Address not found';
-  document.getElementById("crypto__address").textContent = cryptoAddress;
-
-
-}
-
-
-
 
 const cryptoAddressList = [
   {symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11"},
@@ -188,3 +104,46 @@ const cryptoAddressList = [
 ];
 
 
+
+
+
+
+
+// function fetchCryptoIcon () {
+// const url = 'https://cryptofonts-token-icon-api1.p.rapidapi.com/1/${0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0}';
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23',
+// 		'X-RapidAPI-Host': 'cryptofonts-token-icon-api1.p.rapidapi.com'
+// 	}
+// };
+
+// try {
+// 	const response = await fetch(url, options);
+// 	const result = await response.text();
+// 	console.log(result);
+// } catch (error) {
+// 	console.error(error);
+// }
+// }
+
+
+const url = 'https://cryptofonts-token-icon-api1.p.rapidapi.com/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23',
+		'X-RapidAPI-Host': 'cryptofonts-token-icon-api1.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+	console.log(result);
+} catch (error) {
+	console.error(error);
+}
+
+`https://cryptofonts-token-icon-api1.p.rapidapi.com/${cryptoAddress}`;
