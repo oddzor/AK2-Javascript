@@ -82,11 +82,12 @@ function cryptoInformationMain(cryptoData) {
 // Asynchronous function to fetch and display a crypto icon
 async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     // Find the crypto address from the cryptoAddressList based on the provided symbol
+    // Find the crypto object from the cryptoAddressList based on the provided symbol
     const cryptoObj = cryptoAddressList.find(c => c.name === cryptoSymbol);
 
     if (!cryptoObj) {
-        console.error("Crypto symbol not found in address list.");
-        return;
+        console.error("Crypto symbol not found in the address list.");
+        return; // Exit the function if the symbol is not found
     }
 
     // Replace the placeholder URL with the actual address from cryptoAddressList
