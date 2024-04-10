@@ -24,7 +24,9 @@ This API is for icons related to cryptocurrencies and works together with a "fre
 
 https://cryptofonts.com/
 
+
 ### CORS Plugin 
+
 
 Plugin for your browser to work around CORS issues.
 
