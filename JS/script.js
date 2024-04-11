@@ -122,6 +122,8 @@ function cryptoInformationMain(cryptoData) {
   fetchAndDisplayCryptoIcon(cryptoData.symbol);
 }
 
+// Adds elements to watchlist by utilizing localstorage
+
 document.getElementById("add-to-watchlist").addEventListener("click", function () {
   const cryptoData = {
     rank: document.getElementById("crypto__rank__main").textContent.replace("Rank: ", ""),

@@ -11,3 +11,27 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("goToWatchListClicked");
   }
 });
+
+function displaySavedCryptoData() {
+  const keys = Object.keys(localStorage)
+
+  const container = document.getElementById("saved-crypto-container");
+
+  keys.forEach((key) => {
+    if (key.startsWith("watchlist_")) {
+      const cryptoData = JSON.parse(localStorage.getItem(key));
+
+      console.log("Crypto data", cryptoData);
+
+      const listItem = document.createElement("li");
+
+      listItem.textContent = `${cryptoData.rank}. ${cryptoData.name}. (${cryptoData.symbol}). $${cryptoData.price_usd}`;
+
+      container.appendChild(listItem);
+    }
+  });
+}
+
+displaySavedCryptoData ();
+
+
