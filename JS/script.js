@@ -34,7 +34,22 @@ function addCrypto(crypto) {
     document.querySelector(".crypto__additional__info").style.display = "block";
     cryptoInformationMain(crypto);
   });
+
   listElement.appendChild(listTemplate);
+}
+// Function to add eventlistener to button with id= "go-to-watchlist-button"
+const goToWatchListButton = document.getElementById("go-to-watchlist-button");
+goToWatchListButton.addEventListener("click", () => {
+  goToWatchList(crypto);
+  console.log("button clicked");
+});
+// function to make the generated gotowatchlistbutton, take the user to list.html
+function goToWatchList(crypto) {
+  const queryString = new URLSearchParams(crypto).toString();
+  const url = `list.html?${queryString}`;
+  localStorage.setItem("goToWatchListClicked", "true");
+
+  window.location.href = url;
 }
 
 // Funksjon for å vise api data på respektive id's i html
