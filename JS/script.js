@@ -59,18 +59,13 @@ window.addEventListener("load", () => {
 // Function to add eventlistener to button with id= "go-to-watchlist-button"
 
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
-goToWatchListButton.addEventListener("click", () => {
-  goToWatchList(crypto);
-  console.log("button clicked");
-});
+goToWatchListButton.addEventListener("click", goToWatchList);
 
-// function to make the generated gotowatchlistbutton, take the user to list.html
+// function to make the gotowatchlistbutton, take the user to list.html
 
 function goToWatchList(crypto) {
-  const queryString = new URLSearchParams(crypto).toString();
-  const url = `list.html?${queryString}`;
+  const url = "list.html";
   localStorage.setItem("goToWatchListClicked", "true");
-
   window.location.href = url;
 }
 
