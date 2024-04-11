@@ -137,10 +137,6 @@ document.getElementById("add-to-watchlist").addEventListener("click", function (
   localStorage.setItem(key, JSON.stringify(cryptoData));
 });
 
-cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
-document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
-fetchAndDisplayCryptoIcon(cryptoData.symbol);
-
 // funksjon for å hente ikon, og displaye ikon som matcher symbol
 async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
   const cryptoObj = cryptoAddressList.find((c) => c.symbol === cryptoSymbol);
