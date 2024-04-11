@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
   getCryptoData();
 });
 
+
+
 //Handles fetch for apidata og error handling
+
 async function getCryptoData() {
   const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
 
@@ -23,6 +26,33 @@ async function getCryptoData() {
 
 function addCrypto(crypto) {
   const listElement = document.getElementById("main__list__element");
+
+  const listTemplate = document
+    .getElementById("main__list__template")
+    .content.cloneNode(true);
+
+  listTemplate.querySelector(".crypto__symbol__index").textContent =
+    crypto.symbol;
+  listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
+  listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
+  listTemplate.querySelector(".crypto__price__index").textContent =
+    crypto.price_usd;
+  listTemplate
+    .querySelector(".crypto__list__wrapper")
+    .addEventListener("click", () => {
+      document.getElementById("main__list__element").style.display = "none";
+      document.querySelector(".crypto__additional__info").style.display =
+        "block";
+      cryptoInformationMain(crypto);
+    });
+  listElement.appendChild(listTemplate);
+
+}
+
+function cryptoInformationMain(cryptoData) {
+  const iconElement = document
+    .getElementById("crypto__icon__main")
+    .querySelector("img");
   const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
 
   listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
@@ -98,7 +128,26 @@ function cryptoInformationMain(cryptoData) {
   tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
   msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
 
-  const cryptoAddress =
+  const cryptoAddress = cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address ||
+    "Address not found";
+  document.getElementById("crypto__address").textContent =
+    "Token Address: " + cryptoAddress;
+  fetchAndDisplayCryptoIcon(cryptoData.symbol);
+}
+
+document.getElementById("add-to-watchlist").addEventListener("click", function() {
+    const cryptoData = {
+        rank: document.getElementById("crypto__rank__main").textContent.replace("Rank: ", ""),
+        name: document.getElementById("crypto__name__main").textContent.replace("Name: ", ""),
+        symbol: document.getElementById("crypto__symbol__main").textContent.replace("Symbol: ", ""),
+        price_usd: document.getElementById("crypto__price__main").textContent.replace("Price USD: ", "")
+    };
+    const name = cryptoData.name.replace(/ /g, "_");
+    const key = `watchlist_${name}`;
+
+    localStorage.setItem(key, JSON.stringify(cryptoData));
+});
+
     cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
   document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
   fetchAndDisplayCryptoIcon(cryptoData.symbol);
@@ -128,7 +177,10 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     const data = await response.json();
     const imageUrl = data[0].logoURI;
 
-    const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
+    const iconElement = document
+      .getElementById("crypto__icon__main")
+      .querySelector("img");
+
     if (iconElement) {
       iconElement.src = imageUrl;
     } else {
