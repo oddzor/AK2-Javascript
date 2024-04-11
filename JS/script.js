@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
   getCryptoData();
 });
 
+
+
+//Handles fetch for apidata og error handling
+
 async function getCryptoData() {
   const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
 
@@ -18,12 +22,11 @@ async function getCryptoData() {
   }
 }
 
-
-
 // Populating elements on index.html
 
 function addCrypto(crypto) {
   const listElement = document.getElementById("main__list__element");
+
   const listTemplate = document
     .getElementById("main__list__template")
     .content.cloneNode(true);
@@ -50,6 +53,55 @@ function cryptoInformationMain(cryptoData) {
   const iconElement = document
     .getElementById("crypto__icon__main")
     .querySelector("img");
+  const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
+
+  listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
+  listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
+  listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
+  listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+  listTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
+    document.getElementById("main__list__element").style.display = "none";
+    document.querySelector(".crypto__additional__info").style.display = "block";
+    cryptoInformationMain(crypto);
+  });
+
+  listElement.appendChild(listTemplate);
+}
+
+//Listen for click event on returnbutton, then if button is clicked return to index.html
+
+const returnButton = document.getElementById("return-button");
+returnButton.addEventListener("click", () => {
+  //adds localstorage flag
+  localStorage.setItem("returnToIndex", "true");
+  window.location.href = "index.html";
+});
+
+//checks if flag is stored on pageload, if it is, console log() and remove flag
+window.addEventListener("load", () => {
+  const returnFlag = localStorage.getItem("returnToIndex");
+  if (returnFlag === "true") {
+    console.log("returned to index.html");
+    localStorage.removeItem("returnToIndex");
+  }
+});
+
+// Function to add eventlistener to button with id= "go-to-watchlist-button"
+
+const goToWatchListButton = document.getElementById("go-to-watchlist-button");
+goToWatchListButton.addEventListener("click", goToWatchList);
+
+// function to make the gotowatchlistbutton, take the user to list.html
+
+function goToWatchList(crypto) {
+  const url = "list.html";
+  localStorage.setItem("goToWatchListClicked", "true");
+  window.location.href = url;
+}
+
+// Funksjon for å vise api data på respektive id's i html
+function cryptoInformationMain(cryptoData) {
+  const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
   const rankElement = document.getElementById("crypto__rank__main");
   const nameElement = document.getElementById("crypto__name__main");
   const symbolElement = document.getElementById("crypto__symbol__main");
@@ -67,20 +119,16 @@ function cryptoInformationMain(cryptoData) {
   nameElement.innerHTML = "Name: " + cryptoData.name;
   symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
   priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
-  change1hElement.innerHTML =
-    "Percentage Change 1h: " + cryptoData.percent_change_1h;
-  change24hElement.innerHTML =
-    "Percentage Change 24h: " + cryptoData.percent_change_24h;
-  change1dElement.innerHTML =
-    "Percentage Change 7d: " + cryptoData.percent_change_7d;
+  change1hElement.innerHTML = "Percentage Change 1h: " + cryptoData.percent_change_1h;
+  change24hElement.innerHTML = "Percentage Change 24h: " + cryptoData.percent_change_24h;
+  change1dElement.innerHTML = "Percentage Change 7d: " + cryptoData.percent_change_7d;
   marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
   volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
   csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
   tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
   msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
 
-  const cryptoAddress =
-    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address ||
+  const cryptoAddress = cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address ||
     "Address not found";
   document.getElementById("crypto__address").textContent =
     "Token Address: " + cryptoAddress;
@@ -100,6 +148,12 @@ document.getElementById("add-to-watchlist").addEventListener("click", function()
     localStorage.setItem(key, JSON.stringify(cryptoData));
 });
 
+    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
+  document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
+  fetchAndDisplayCryptoIcon(cryptoData.symbol);
+}
+
+// funksjon for å hente ikon, og displaye ikon som matcher symbol
 async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
   const cryptoObj = cryptoAddressList.find((c) => c.symbol === cryptoSymbol);
 
@@ -126,6 +180,7 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     const iconElement = document
       .getElementById("crypto__icon__main")
       .querySelector("img");
+
     if (iconElement) {
       iconElement.src = imageUrl;
     } else {
@@ -140,7 +195,7 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
 
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
-  { symbol: "ETH", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d" },
+  { symbol: "ETH", address: "0xa2E3356610840701BDf5611a53974510Ae27E2e1" },
   { symbol: "USDT", address: "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
   { symbol: "BNB", address: "0xb8c77482e45f1f44de1745f52c74426c631bdd52" },
   { symbol: "SOL", address: "0x570A5D26f7765Ecb712C0924E4De545B89fD43dF" },
@@ -240,5 +295,3 @@ const cryptoAddressList = [
   { symbol: "KCS", address: "0x039B5649A59967e3e936D7471f9c3700100Ee1ab" },
   { symbol: "KLAY", address: "0x393126c0653F49E079500cc0f218A27c793136A0" },
 ];
-
-
