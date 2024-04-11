@@ -37,13 +37,35 @@ function addCrypto(crypto) {
 
   listElement.appendChild(listTemplate);
 }
+
+//Listen for click event on returnbutton, then if button is clicked return to index.html
+
+const returnButton = document.getElementById("return-button");
+returnButton.addEventListener("click", () => {
+  //adds localstorage flag
+  localStorage.setItem("returnToIndex", "true");
+  window.location.href = "index.html";
+});
+
+//checks if flag is stored on pageload, if it is, console log() and remove flag
+window.addEventListener("load", () => {
+  const returnFlag = localStorage.getItem("returnToIndex");
+  if (returnFlag === "true") {
+    console.log("returned to index.html");
+    localStorage.removeItem("returnToIndex");
+  }
+});
+
 // Function to add eventlistener to button with id= "go-to-watchlist-button"
+
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
 goToWatchListButton.addEventListener("click", () => {
   goToWatchList(crypto);
   console.log("button clicked");
 });
+
 // function to make the generated gotowatchlistbutton, take the user to list.html
+
 function goToWatchList(crypto) {
   const queryString = new URLSearchParams(crypto).toString();
   const url = `list.html?${queryString}`;
