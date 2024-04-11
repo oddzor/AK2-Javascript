@@ -35,7 +35,7 @@ function addCrypto (crypto) {
     listTemplate.querySelector(".crypto__list__wrapper").addEventListener('click', () => {
       document.getElementById("main__list__element").style.display = "none"; 
       document.querySelector(".crypto__additional__info").style.display = "block";
-      cryptoInformationMain(crypto); 
+      cryptoInformationMain(crypto);
   });
     listElement.appendChild(listTemplate);
     
@@ -58,70 +58,67 @@ function cryptoInformationMain(cryptoData) {
   const csupplyElement = document.getElementById("crypto__csupply");
   const tsupplyElement = document.getElementById("crypto__tsupply");
   const msupplyElement = document.getElementById("crypto__msupply");
-  const addressElement = document.getElementById("crypto__address");
+  
 
-  rankElement.innerHTML = cryptoData.rank;
-  nameElement.innerHTML = cryptoData.name;
-  symbolElement.innerHTML = cryptoData.symbol;
-  priceElement.innerHTML = cryptoData.price_usd;
-  change1hElement.innerHTML = cryptoData.percent_change_1h;
-  change24hElement.innerHTML = cryptoData.percent_change_24h;
-  change1dElement.innerHTML = cryptoData.percent_change_7d;
-  marketcapElement.innerHTML = cryptoData.market_cap_usd;
-  volume24hElement.innerHTML = cryptoData.volume24;
-  csupplyElement.innerHTML = cryptoData.csupply;
-  tsupplyElement.innerHTML = cryptoData.tsupply;
-  msupplyElement.innerHTML = cryptoData.msupply;
-  addressElement.innerHTML = cryptoAddressList.address;
+  rankElement.innerHTML = "Rank: "+cryptoData.rank;
+  nameElement.innerHTML = "Name: "+cryptoData.name;
+  symbolElement.innerHTML = "Symbol: "+cryptoData.symbol;
+  priceElement.innerHTML = "Price USD: "+cryptoData.price_usd;
+  change1hElement.innerHTML = "Percentage Change 1h: "+cryptoData.percent_change_1h;
+  change24hElement.innerHTML = "Percentage Change 24h: "+cryptoData.percent_change_24h;
+  change1dElement.innerHTML = "Percentage Change 7d: "+cryptoData.percent_change_7d;
+  marketcapElement.innerHTML = "Market Cap USD: "+cryptoData.market_cap_usd;
+  volume24hElement.innerHTML = "Volume 24h: "+cryptoData.volume24;
+  csupplyElement.innerHTML = "Current Supply: "+cryptoData.csupply;
+  tsupplyElement.innerHTML = "Total Supply: "+cryptoData.tsupply;
+  msupplyElement.innerHTML = "Max Supply: "+cryptoData.msupply;
+  
 
   const cryptoAddress = cryptoAddressList.find(c => c.symbol === cryptoData.symbol)?.address || 'Address not found';
-  document.getElementById("crypto__address").textContent = cryptoAddress;
-
+  document.getElementById("crypto__address").textContent = "Token Address: "+cryptoAddress;
+  fetchAndDisplayCryptoIcon(cryptoData.symbol); 
 
 }
 
-// Asynchronous function to fetch and display a crypto icon
+
 async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
-    // Find the crypto address from the cryptoAddressList based on the provided symbol
-    // Find the crypto object from the cryptoAddressList based on the provided symbol
-    const cryptoObj = cryptoAddressList.find(c => c.name === cryptoSymbol);
+   
+    const cryptoObj = cryptoAddressList.find(c => c.symbol === cryptoSymbol);
 
     if (!cryptoObj) {
         console.error("Crypto symbol not found in the address list.");
-        return; // Exit the function if the symbol is not found
+        return; 
     }
 
-    // Replace the placeholder URL with the actual address from cryptoAddressList
+   
     const url = `https://cryptofonts-token-icon-api1.p.rapidapi.com/${cryptoObj.address}`;
-
+console.log("Requesting URL:", url);
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23', // Use your actual RapidAPI Key
+            'X-RapidAPI-Key': '785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23',
             'X-RapidAPI-Host': 'cryptofonts-token-icon-api1.p.rapidapi.com'
         }
     };
 
     try {
         const response = await fetch(url, options);
-        const data = await response.json(); // Parse the JSON response
+        const data = await response.json(); 
+        const imageUrl = data[0].logoURI;
 
-        // Use the logoURI from the response to set the image source
-        const imageUrl = data.logoURI;
 
-        // Assuming there's an <img> element within the "crypto__icon__main" container
         const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
         if (iconElement) {
             iconElement.src = imageUrl;
         } else {
-            // If no <img> exists, create one and append it
+           
             const imgElement = document.createElement("img");
             imgElement.src = imageUrl;
             document.getElementById("crypto__icon__main").appendChild(imgElement);
         }
 
     } catch (error) {
-        console.error("Error fetching the crypto icon:", error);
+        console.error("No icon for this crypto in database:", error);
     }
 }
 
@@ -150,7 +147,7 @@ const cryptoAddressList = [
   {symbol: "UNI", address: "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984"},
   {symbol: "LEO", address: "0x2AF5D2aD76741191D15Dfe7bF6aC92d4Bd912Ca3"},
   {symbol: "APT", address: "0xB12dAB2A48a53C96734E0989edA6fdBc5e1A9dbe"},
-  {symbol: "ETC", address: "0xdD2799Fc98C010D967ba0a95A1fe6DaB8C08cb97"},
+  {symbol: "ETC", address: "0x3d6545b08693dae087e957cb1180ee38b9e3c25e"},
   {symbol: "STX", address: "0x7db0E1b967CE66d3ff135e1AC4c312b84890ca71"},
   {symbol: "FIL", address: "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153"},
   {symbol: "MNT", address: "0x3c3a81e81dc49A522A592e7622A7E711c06bf354"},
