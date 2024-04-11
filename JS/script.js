@@ -143,7 +143,7 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
 
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
-  { symbol: "ETH", address: "0x74b23882a30290451A17c44f4F05243b6b58C76d" },
+  { symbol: "ETH", address: "0xa2E3356610840701BDf5611a53974510Ae27E2e1" },
   { symbol: "USDT", address: "0xdAC17F958D2ee523a2206206994597C13D831ec7" },
   { symbol: "BNB", address: "0xb8c77482e45f1f44de1745f52c74426c631bdd52" },
   { symbol: "SOL", address: "0x570A5D26f7765Ecb712C0924E4De545B89fD43dF" },
