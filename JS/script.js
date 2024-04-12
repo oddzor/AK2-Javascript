@@ -117,11 +117,17 @@ document.getElementById("add-to-watchlist").addEventListener("click", function (
     price_usd: document
       .getElementById("crypto__price__main")
       .textContent.replace("Price USD: ", ""),
+    percentage_change24h: document
+      .getElementById("crypto__change24h")
+      .textContent.replace("percent_change24h: ", ""),
   };
   const name = cryptoData.name.replace(/ /g, "_");
   const key = `watchlist_${name}`;
 
   localStorage.setItem(key, JSON.stringify(cryptoData));
+
+  // log local storage to check if the item was added correctly
+  console.log("Local Storage after adding item:", localStorage);
 
   //show popup
   showPopup(`${cryptoData.name} has been added to your watchlist!`);
