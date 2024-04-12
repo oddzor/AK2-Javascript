@@ -34,6 +34,7 @@ function displaySavedCryptoData() {
         localStorage.removeItem(key);
         // remove the list item from display
         container.removeChild(listItem);
+        showPopup(`${cryptoData.name} has been removed from your watchlist.`);
       });
 
       listItem.textContent = `${cryptoData.rank}. ${cryptoData.name}. (${cryptoData.symbol}). $${cryptoData.price_usd}`;

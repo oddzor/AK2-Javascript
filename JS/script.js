@@ -122,6 +122,10 @@ document.getElementById("add-to-watchlist").addEventListener("click", function (
   const key = `watchlist_${name}`;
 
   localStorage.setItem(key, JSON.stringify(cryptoData));
+
+  //show popup
+  showPopup(`${cryptoData.name} has been added to your watchlist!`);
+  //
 });
 
 // funksjon for å hente ikon, og displaye ikon som matcher symbol
