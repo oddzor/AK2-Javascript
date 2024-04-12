@@ -72,3 +72,51 @@
 #go-to-watchlist-button:hover {
   background-color: rgb(195, 30, 30);
 }
+
+.display-chosen-crypto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+.crypto-icon-main {
+  display: flex;
+  justify-content: center;
+}
+
+.crypto-icon-main > img {
+  width: 100px;
+}
+
+.crypto__additional__info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+  height: 500px;
+  width: 350px;
+  padding: 10px 20px;
+  border-radius: 5px;
+
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.popup {
+  width: 350px;
+  position: relative;
+  bottom: 600px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e94242;
+  color: #333333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.token-address {
+  display: block;
+  font-size: 0.8rem;
+}

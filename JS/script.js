@@ -99,13 +99,75 @@ window.addEventListener("load", () => {
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
 goToWatchListButton.addEventListener("click", goToWatchList);
 
-
 // function to make the gotowatchlistbutton, take the user to list.html
 
 function goToWatchList() {
   const url = "list.html";
   localStorage.setItem("goToWatchListClicked", "true");
   window.location.href = url;
+}
+
+// Adds elements to watchlist by utilizing localstorage
+
+document.getElementById("add-to-watchlist").addEventListener("click", function () {
+  const cryptoData = {
+    rank: document.getElementById("crypto__rank__main").textContent.replace("Rank: ", ""),
+    name: document.getElementById("crypto__name__main").textContent.replace("Name: ", ""),
+    symbol: document.getElementById("crypto__symbol__main").textContent.replace("Symbol: ", ""),
+    price_usd: document
+      .getElementById("crypto__price__main")
+      .textContent.replace("Price USD: ", ""),
+    percentage_change24h: document
+      .getElementById("crypto__change24h")
+      .textContent.replace("percent_change24h: ", ""),
+  };
+  const name = cryptoData.name.replace(/ /g, "_");
+  const key = `watchlist_${name}`;
+
+  localStorage.setItem(key, JSON.stringify(cryptoData));
+
+  // log local storage to check if the item was added correctly
+  console.log("Local Storage after adding item:", localStorage);
+
+  //show popup
+  showPopup(`${cryptoData.name} has been added to your watchlist!`);
+  //
+});
+
+// funksjon for å hente ikon, og displaye ikon som matcher symbol
+async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
+  const cryptoObj = cryptoAddressList.find((c) => c.symbol === cryptoSymbol);
+
+  if (!cryptoObj) {
+    console.error("Crypto symbol not found in the address list.");
+    return;
+  }
+
+  const url = `https://cryptofonts-token-icon-api1.p.rapidapi.com/${cryptoObj.address}`;
+  console.log("Requesting URL:", url);
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23",
+      "X-RapidAPI-Host": "cryptofonts-token-icon-api1.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    const imageUrl = data[0].logoURI;
+
+    const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
+
+    if (iconElement) {
+      iconElement.src = imageUrl;
+    } else {
+      console.error("Image element not found in crypto__icon__main.");
+    }
+  } catch (error) {
+    console.error("No icon for this crypto in database:", error);
+  }
 }
 
 // Funksjon for å vise api data på respektive id's i html
@@ -139,6 +201,13 @@ function cryptoInformationMain(cryptoData) {
   tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
   msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
 
+  //apply styling t the crypto icon main to serve as placeholder for the cryptoIcon
+
+  const cryptoIconMain = document.getElementById("crypto__icon__main");
+  cryptoIconMain.style.width = "auto";
+  cryptoIconMain.style.height = "100px";
+  cryptoIconMain.style.marginBottom = "10px";
+
   // Detailed console log properties of specific cryptoData
   console.log(
     "%cCrypto Item: " + cryptoData.name, // "%c" gir mulighet til å style spesifikk string i dette utgangspunketet cryptoDatanavn i console
@@ -146,72 +215,16 @@ function cryptoInformationMain(cryptoData) {
   );
   console.log("Crypto item properties:", cryptoData); // logger properties til cryptoData
 
-  //
-
   const cryptoAddress =
     cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
   document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
+
+  //Fetch and display cryptoIcon
   fetchAndDisplayCryptoIcon(cryptoData.symbol);
-}
-
-// Adds elements to watchlist by utilizing localstorage
-
-document.getElementById("add-to-watchlist").addEventListener("click", function () {
-  const cryptoData = {
-    rank: document.getElementById("crypto__rank__main").textContent.replace("Rank: ", ""),
-    name: document.getElementById("crypto__name__main").textContent.replace("Name: ", ""),
-    symbol: document.getElementById("crypto__symbol__main").textContent.replace("Symbol: ", ""),
-    price_usd: document
-      .getElementById("crypto__price__main")
-      .textContent.replace("Price USD: ", ""),
-  };
-  const name = cryptoData.name.replace(/ /g, "_");
-  const key = `watchlist_${name}`;
-
-  localStorage.setItem(key, JSON.stringify(cryptoData));
-});
-
-// funksjon for å hente ikon, og displaye ikon som matcher symbol
-async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
-  const cryptoObj = cryptoAddressList.find((c) => c.symbol === cryptoSymbol);
-
-  if (!cryptoObj) {
-    console.error("Crypto symbol not found in the address list.");
-    return;
-  }
-
-  const url = `https://cryptofonts-token-icon-api1.p.rapidapi.com/${cryptoObj.address}`;
-  console.log("Requesting URL:", url);
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "785b789e93msh3aaefad080e618ep1a9d61jsnb8d978558d23",
-      "X-RapidAPI-Host": "cryptofonts-token-icon-api1.p.rapidapi.com",
-    },
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    const imageUrl = data[0].logoURI;
-
-    const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
-
-    if (iconElement) {
-      iconElement.src = imageUrl;
-    } else {
-      const imgElement = document.createElement("img");
-      imgElement.src = imageUrl;
-      document.getElementById("crypto__icon__main").appendChild(imgElement);
-    }
-  } catch (error) {
-    console.error("No icon for this crypto in database:", error);
-  }
 }
 
 // An array of objects containing symbols and corresponding adresses
 // used to match adresses with symbols for their respective cryptoItem
-
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
   { symbol: "ETH", address: "0xa2E3356610840701BDf5611a53974510Ae27E2e1" },
