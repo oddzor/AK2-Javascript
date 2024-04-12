@@ -3,7 +3,7 @@ const currentPage = window.location.href.split("/").pop(); //Extracts the last p
 
 //navigation data
 const navItems = [
-  { text: "Hjem", href: "index.html" },
+  { text: "Home", href: "index.html" },
   { text: "Watchlist", href: "list.html" },
 ];
 

@@ -158,7 +158,6 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
 // Funksjon for å vise api data på respektive id's i html
 function cryptoInformationMain(cryptoData) {
   // Display information about the crypto item
-  const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
   const rankElement = document.getElementById("crypto__rank__main");
   const nameElement = document.getElementById("crypto__name__main");
   const symbolElement = document.getElementById("crypto__symbol__main");

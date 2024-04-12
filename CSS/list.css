@@ -11,11 +11,6 @@
   font-size: 2rem;
 }
 
-#watchlist-wrapper {
-  background-color: #202020;
-  padding: 2em;
-  border-radius: 5px;
-}
 
 .list-container {
 display: flex;
@@ -49,23 +44,40 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   padding: 1em;
   margin: 10px;
   color: orange;
-  font-size: 1.5em;
+  font-size: 1rem;
 
 }
 
 #saved-crypto-container > li {
+  display: flex;
+  justify-content: space-between;
   color: white;
   margin: 5px;
-  font-size: 1.2em;
+  font-size: 1rem;
+}
+
+#saved-crypto-container > li > button {
+  border: none;
+  color: red;
+  background: none;
 }
 
 #sortRankButton, #sortPriceButton, #sortNameButton {
-  font-size: 2em;
-color: orange;
-margin-bottom: 50px;
-background-color: #202020;
-font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#202020;
+  padding: 0.25rem;
+  border: white 1.5px solid;
+  color:  #F27121;
+  font-size: 1rem;
+  border-radius: 0.25rem;
 
+}
+
+.sort-icon {
+  height: 70%;
+  margin-left: 1rem;
 }
 
 
