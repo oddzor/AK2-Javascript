@@ -57,7 +57,8 @@ Cryptocurrency information webpage with three separate pages.
 (CoinLore and Cryptofonts API integrated) Clicking a list item will provide a more detailed breakdown of your selected cryptocurrency from the list this will include more specific information like 24h volume, token to BTC ratio and supply caps. 
 ```
 
-From detailed breakdown, you can elect to add your selected cryptocurrency to watchlist (localStorage) and either return to list or go to your watchlist.
+From detailed breakdown, you can elect to add your selected cryptocurrency to watchlist (localStorage)
+and either return to list or go to your watchlist.
 
 ```
 
@@ -65,7 +66,8 @@ From detailed breakdown, you can elect to add your selected cryptocurrency to wa
 
 ```
 
-Watchlist data will remain persisted in local storage, so when closing and opening browser, your selected tokens will still be available for viewing.
+Watchlist data will remain persisted in local storage, so when closing and opening browser, 
+your selected tokens will still be available for viewing.
 
 ```
 ---
