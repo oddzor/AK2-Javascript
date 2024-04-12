@@ -57,8 +57,8 @@ Cryptocurrency information webpage with three separate pages.
 (CoinLore and Cryptofonts API integrated) Clicking a list item will provide a more detailed breakdown of your selected cryptocurrency from the list this will include more specific information like 24h volume, token to BTC ratio and supply caps. 
 ```
 
-From detailed breakdown, you can elect to add your selected cryptocurrency to watchlist (localStorage)
-and either return to list or go to your watchlist.
+From detailed breakdown, you can elect to add your selected cryptocurrency to
+watchlist (localStorage) and either return to list or go to your watchlist.
 
 ```
 
@@ -135,14 +135,15 @@ your selected tokens will still be available for viewing.
 
 ```
 
-The last portion of this fetch URL is replaced by a crypto token address that has been hardcoded into an array,
-the array contains a "symbol" and an "address", symbol is cross referenced with API data symbol as they are identical per token,
+The last portion of this fetch URL is replaced by a crypto token address that has been hardcoded
+into an array, the array contains a "symbol" and an "address",
+symbol is cross referenced with API data symbol as they are identical per token,
 then address is retrieved from the array to allow the API request to be sent.
 ```
 ```
 
-As shown in the array excerpt below, symbol from the API data is matched with symbol in the array data,
-then address is retrieved and populated into the image fetch url.
+As shown in the array excerpt below, symbol from the API data is matched with symbol in the
+array data, then address is retrieved and populated into the image fetch url.
 
 ```
 
@@ -150,7 +151,7 @@ then address is retrieved and populated into the image fetch url.
 
 ```
 
-Then the imageURL from the API data is directly used as the image src for the corresponding HTML element. 
+Then the URL from the API data is directly used as the src for the corresponding HTML element. 
 
 ```
 
