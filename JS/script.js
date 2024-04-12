@@ -99,7 +99,9 @@ window.addEventListener("load", () => {
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
 goToWatchListButton.addEventListener("click", goToWatchList);
 
-// function to make the gotowatchlistbutton, take the user to list.html and generate storage flag to be retrieved
+
+// function to make the gotowatchlistbutton, take the user to list.html
+
 function goToWatchList() {
   const url = "list.html";
   localStorage.setItem("goToWatchListClicked", "true");
