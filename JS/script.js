@@ -192,14 +192,15 @@ function cryptoInformationMain(cryptoData) {
   nameElement.innerHTML = "Name: " + cryptoData.name;
   symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
   priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
-  change1hElement.innerHTML = "Percentage Change 1h: " + cryptoData.percent_change_1h;
-  change24hElement.innerHTML = "Percentage Change 24h: " + cryptoData.percent_change_24h;
-  change1dElement.innerHTML = "Percentage Change 7d: " + cryptoData.percent_change_7d;
+  change1hElement.innerHTML = "Percentage Change 1h: <span class=value>" + cryptoData.percent_change_1h + "</span>"; // Span for easier styling with priceColor()
+  change24hElement.innerHTML = "Percentage Change 24h: <span class=value>" + cryptoData.percent_change_24h + "</span>";
+  change1dElement.innerHTML = "Percentage Change 7d: <span class=value>" + cryptoData.percent_change_7d+ "</span>";
   marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
   volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
   csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
   tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
   msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
+  priceColor();
 
   //apply styling t the crypto icon main to serve as placeholder for the cryptoIcon
 
@@ -223,8 +224,32 @@ function cryptoInformationMain(cryptoData) {
   fetchAndDisplayCryptoIcon(cryptoData.symbol);
 }
 
+// Function to adjust text color on price change data based on increase/decrease or no change.
+
+function priceColor() {
+  const changeElements = ['crypto__change1h', 'crypto__change24h', 'crypto__change1d'];
+
+  changeElements.forEach((elementId) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const valueSpan = element.querySelector('.value');
+      if (valueSpan) {
+        const value = parseFloat(valueSpan.innerText); 
+        if (value > 0) {
+          valueSpan.style.color = 'green';
+        } else if (value < 0) {
+          valueSpan.style.color = 'red';
+        } else {
+          valueSpan.style.color = 'black';
+        }
+      }
+    }
+  });
+}
+
 // An array of objects containing symbols and corresponding adresses
 // used to match adresses with symbols for their respective cryptoItem
+
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
   { symbol: "ETH", address: "0xa2E3356610840701BDf5611a53974510Ae27E2e1" },
