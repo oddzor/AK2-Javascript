@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// function to display data from local storage in the ul element with id saved-crypto-container
 function displaySavedCryptoData() {
-  const keys = Object.keys(localStorage)
+  const keys = Object.keys(localStorage);
 
   const container = document.getElementById("saved-crypto-container");
 
@@ -25,13 +26,24 @@ function displaySavedCryptoData() {
 
       const listItem = document.createElement("li");
 
+      //create a remove button for each lsit element
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      removeButton.addEventListener("click", () => {
+        //remove item from local storage
+        localStorage.removeItem(key);
+        // remove the list item from display
+        container.removeChild(listItem);
+      });
+
       listItem.textContent = `${cryptoData.rank}. ${cryptoData.name}. (${cryptoData.symbol}). $${cryptoData.price_usd}`;
 
+      //append the remove button to the list item
+      listItem.appendChild(removeButton);
+      // append listitem to container
       container.appendChild(listItem);
     }
   });
 }
 
-displaySavedCryptoData ();
-
-
+displaySavedCryptoData();
