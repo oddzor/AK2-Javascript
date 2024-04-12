@@ -1,45 +1,71 @@
 #watchlist-wrapper h1 {
-    display: flex;
-    justify-content: center;
-    color: #F27121;
-    font-size: 2.5rem;
-    
+  display: flex;
+  justify-content: center;
+  color: #F27121;
+  font-size: 2.5rem;
+  
 }
 
 #watchlist-wrapper ul {
-    color: white;
-    font-size: 2rem;
+  color: white;
+  font-size: 2rem;
 }
 
 #watchlist-wrapper {
-    background-color: #202020;
-    padding: 2em;
+  background-color: #202020;
+  padding: 2em;
+  border-radius: 5px;
 }
 
 .list-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  top: 60px;
-  background-color: aliceblue;
+display: flex;
+flex-direction: column;
+position: relative;
+top: 60px;
 }
 
 .button-container {
-  display: flex;
-  justify-content: space-evenly;
-  margin: 5px;
+display: flex;
+justify-content: space-evenly;
+margin: 5px;
+border-radius: 5px;
 }
 
 .popup {
-  width: 350px;
-  position: absolute;
-  top: 200px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #e94242;
-  color: #333333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+width: 350px;
+position: absolute;
+top: 200px;
+left: 50%;
+transform: translateX(-50%);
+background-color: #e94242;
+color: #333333;
+padding: 10px 20px;
+border-radius: 5px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+#saved-crypto-container {
+  background-color: #202020;
+  padding: 1em;
+  margin: 10px;
+  color: orange;
+  font-size: 1.5em;
+
+}
+
+#saved-crypto-container > li {
+  color: white;
+  margin: 5px;
+  font-size: 1.2em;
+}
+
+#sortRankButton, #sortPriceButton, #sortNameButton {
+  font-size: 2em;
+color: orange;
+margin-bottom: 50px;
+background-color: #202020;
+font-size: 2em;
+
+}
+
 
