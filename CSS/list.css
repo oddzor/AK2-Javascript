@@ -1,3 +1,21 @@
+#watchlist-wrapper h1 {
+    display: flex;
+    justify-content: center;
+    color: #F27121;
+    font-size: 2.5rem;
+    
+}
+
+#watchlist-wrapper ul {
+    color: white;
+    font-size: 2rem;
+}
+
+#watchlist-wrapper {
+    background-color: #202020;
+    padding: 2em;
+}
+
 .list-container {
   display: flex;
   flex-direction: column;
@@ -24,3 +42,4 @@
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
