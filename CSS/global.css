@@ -19,8 +19,7 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 2rem;
-  margin-block: 3rem;
+  margin-top: 3rem;
   width: 100%;
 }
 
@@ -48,30 +47,29 @@ ul {
 
 .dynamic-nav > ul {
   display: flex;
-
   padding: 0; /* Reset default padding */
 }
 
 .dynamic-nav > ul > li {
-  border: black 1.5px solid;
+  border: whitesmoke 1px solid;
   background-color:  #202020;
-  border-radius: 25px;
-  margin: 25px;
+  border-radius: 0.25rem;
+  margin: 1.5rem;
 }
 
 .dynamic-nav > ul > li > a {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 25px;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
   width: 160px;
   height: 45px;
 }
 
 .dynamic-nav > ul > li.active {
   background-color: #F27121;
+
 }
 
 .dynamic-nav > ul > li:hover {

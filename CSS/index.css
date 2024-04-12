@@ -33,11 +33,28 @@
 .list__template__info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
   font-size: 2em;
   color: orange;
   
+}
+
+#list__template__rank {
+margin-left: 2rem;
+}
+
+#list__template__symbol {
+
+  margin-left: 12rem;
+}
+
+#list__template__name {
+
+  margin-left: 9.2rem;
+}
+
+#list__template__price {
+  margin-left: 11.5rem;
+
 }
 
 .crypto__rank__index {
@@ -56,28 +73,32 @@
   width: 160px;
   height: 45px;
   margin-top: 10px;
-  border: black 1.5px solid;
+  border: white 1.5px solid;
   color:  #F27121;
   font-size: 1em;
+  border-radius: 0.25rem;
+margin: 0.2rem;
 }
 
 #add-to-watchlist:hover {
-  background-color: rgb(195, 30, 30);
+  background-color: #F27121;
+  color: black;
 }
 
 #return-button:hover {
-  background-color: rgb(195, 30, 30);
+  background-color: #F27121;
+  color: black;
 }
 
 #go-to-watchlist-button:hover {
-  background-color: rgb(195, 30, 30);
+  background-color: #F27121;
+  color: black;
 }
 
 .display-chosen-crypto {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px;
 }
 
 .crypto-icon-main {
@@ -90,18 +111,28 @@
 }
 
 .crypto__additional__info {
+
   display: flex;
   flex-direction: column;
   position: relative;
   text-align: center;
-  height: 500px;
-  width: 350px;
   padding: 10px 20px;
   border-radius: 5px;
-
-  background-color: white;
+  background-color:  #202020;
+  color: whitesmoke;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+.crypto__additional__info > div {
+  margin-bottom: 0.75rem;
+}
+
+.crypto__additional__button__wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+}
+
 
 .popup {
   width: 350px;
