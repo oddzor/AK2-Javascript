@@ -16,10 +16,10 @@
       </header>
       <div id="main__list__element">
         <div class="list__template__info">
-          <div>RANK</div>
-          <div>SYMBOL</div>
-          <div>NAME</div>
-          <div>PRICE</div>
+          <div id="list__template__rank">RANK</div>
+          <div id="list__template__symbol">SYMBOL</div>
+          <div id="list__template__name">NAME</div>
+          <div id="list__template__price">PRICE</div>
         </div>
         <template id="main__list__template">
           <div class="crypto__list__wrapper">
@@ -33,10 +33,6 @@
       <div class="display-chosen-crypto">
         <div class="crypto__additional__info" style="display: none">
           <div class="crypto-icon-main" id="crypto__icon__main"><img /></div>
-
-          <button id="add-to-watchlist">Add to Watchlist</button>
-          <button id="return-button">Return</button>
-          <button id="go-to-watchlist-button">Go To Watchlist</button>
           <div id="crypto__symbol__main"></div>
           <div id="crypto__name__main"></div>
           <div id="crypto__rank__main"></div>
@@ -50,6 +46,11 @@
           <div id="crypto__tsupply"></div>
           <div id="crypto__msupply"></div>
           <div class="token-address" id="crypto__address"></div>
+          <div class="crypto__additional__button__wrapper">
+          <button id="add-to-watchlist">Add to Watchlist</button>
+          <button id="return-button">Return</button>
+          <button id="go-to-watchlist-button">Go To Watchlist</button>
+        </div>
         </div>
       </div>
     </div>
