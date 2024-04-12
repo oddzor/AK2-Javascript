@@ -28,12 +28,13 @@ function displaySavedCryptoData() {
 
       //create a remove button for each lsit element
       const removeButton = document.createElement("button");
-      removeButton.textContent = "Remove";
+      removeButton.textContent = "X";
       removeButton.addEventListener("click", () => {
         //remove item from local storage
         localStorage.removeItem(key);
         // remove the list item from display
         container.removeChild(listItem);
+        showPopup(`${cryptoData.name} has been removed from your watchlist.`);
       });
 
       listItem.textContent = `${cryptoData.rank}. ${cryptoData.name}. (${cryptoData.symbol}). $${cryptoData.price_usd}`;
