@@ -1,0 +1,17 @@
+#watchlist-wrapper h1 {
+    display: flex;
+    justify-content: center;
+    color: #F27121;
+    font-size: 2.5rem;
+    
+}
+
+#watchlist-wrapper ul {
+    color: white;
+    font-size: 2rem;
+}
+
+#watchlist-wrapper {
+    background-color: #202020;
+    padding: 2em;
+}

@@ -4,7 +4,10 @@
 }
 
 body {
-  background-color: blueviolet;
+  background: #8A2387;
+background: -webkit-linear-gradient(to right, #F27121, #E94057, #8A2387);
+background: linear-gradient(to right, #F27121, #E94057, #8A2387);
+
   width: 100%;
   margin: 0 auto;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
@@ -39,6 +42,10 @@ ul {
   align-items: center;
 }
 
+.dynamic-nav {
+  margin: 25px;
+}
+
 .dynamic-nav > ul {
   display: flex;
 
@@ -46,9 +53,10 @@ ul {
 }
 
 .dynamic-nav > ul > li {
-  border: black 3px solid;
-  background-color: rgb(169, 36, 198);
+  border: black 1.5px solid;
+  background-color:  #202020;
   border-radius: 25px;
+  margin: 25px;
 }
 
 .dynamic-nav > ul > li > a {
@@ -58,15 +66,19 @@ ul {
   border-radius: 25px;
   text-decoration: none;
   color: white;
-
   width: 160px;
   height: 45px;
 }
 
 .dynamic-nav > ul > li.active {
-  background-color: rgba(235, 45, 23, 0.873);
+  background-color: #F27121;
 }
 
 .dynamic-nav > ul > li:hover {
-  background-color: rgb(195, 30, 30);
+  background-color: #F27121;
 }
+
+
+
+
+

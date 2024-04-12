@@ -4,7 +4,7 @@ const currentPage = window.location.href.split("/").pop(); //Extracts the last p
 //navigation data
 const navItems = [
   { text: "Hjem", href: "index.html" },
-  { text: "list", href: "list.html" },
+  { text: "Watchlist", href: "list.html" },
 ];
 
 // creating dynamic Nav
