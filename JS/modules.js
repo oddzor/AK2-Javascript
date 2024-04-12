@@ -1,4 +1,4 @@
-//function for creating popup elements on different pages
+// function for creating popup elements on different pages
 function showPopup(message) {
   //Create a popup div when element clicked
   const popup = document.createElement("div");
