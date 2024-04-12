@@ -4,17 +4,36 @@ document.addEventListener("DOMContentLoaded", function () {
   getCryptoData();
 });
 
-//Handles fetch for apidata og error handling
+// Array for data from api
+let cryptoDataArray = [];
 
+//Handles fetch for apidata og error handling
 async function getCryptoData() {
   const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    data.data.forEach((crypto) => {
-      addCrypto(crypto);
+
+    // store the retrieved item in an outer array for easier readability in console
+    cryptoDataArray.push(data.data);
+
+    //logging array to see content in console
+    console.log(
+      //apply styling to console log elements for easier navigation
+      "%cRetrieved crypto data:",
+      "font-size: 14px; font-weight: bold; color: limegreen;",
+      cryptoDataArray
+    );
+
+    // Iterate through inner array to add each to DOM
+    cryptoDataArray.forEach((cryptoArray) => {
+      cryptoArray.forEach((crypto) => {
+        addCrypto(crypto);
+      });
     });
+    //
+    //
   } catch (error) {
     console.error("Error retrieving information", error);
   }
@@ -31,6 +50,8 @@ function addCrypto(crypto) {
   listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
   listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
   listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+
+  // Add click event listener when clicked
   listTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
     document.getElementById("main__list__element").style.display = "none";
     document.querySelector(".crypto__additional__info").style.display = "block";
@@ -75,12 +96,10 @@ window.addEventListener("load", () => {
 });
 
 // Function to add eventlistener to button with id= "go-to-watchlist-button"
-
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
 goToWatchListButton.addEventListener("click", goToWatchList);
 
-// function to make the gotowatchlistbutton, take the user to list.html
-
+// function to make the gotowatchlistbutton, take the user to list.html and generate storage flag to be retrieved
 function goToWatchList() {
   const url = "list.html";
   localStorage.setItem("goToWatchListClicked", "true");
@@ -89,6 +108,7 @@ function goToWatchList() {
 
 // Funksjon for å vise api data på respektive id's i html
 function cryptoInformationMain(cryptoData) {
+  // Display information about the crypto item
   const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
   const rankElement = document.getElementById("crypto__rank__main");
   const nameElement = document.getElementById("crypto__name__main");
@@ -103,6 +123,7 @@ function cryptoInformationMain(cryptoData) {
   const tsupplyElement = document.getElementById("crypto__tsupply");
   const msupplyElement = document.getElementById("crypto__msupply");
 
+  // Set the content of HTML elements with crypto data
   rankElement.innerHTML = "Rank: " + cryptoData.rank;
   nameElement.innerHTML = "Name: " + cryptoData.name;
   symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
@@ -115,6 +136,15 @@ function cryptoInformationMain(cryptoData) {
   csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
   tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
   msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
+
+  // Detailed console log properties of specific cryptoData
+  console.log(
+    "%cCrypto Item: " + cryptoData.name, // "%c" gir mulighet til å style spesifikk string i dette utgangspunketet cryptoDatanavn i console
+    "font-size: 18px; font-weight: bold; color: orange;" //Uthevning og farge på utvalgt coin navn til console
+  );
+  console.log("Crypto item properties:", cryptoData); // logger properties til cryptoData
+
+  //
 
   const cryptoAddress =
     cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
@@ -176,6 +206,9 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     console.error("No icon for this crypto in database:", error);
   }
 }
+
+// An array of objects containing symbols and corresponding adresses
+// used to match adresses with symbols for their respective cryptoItem
 
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
