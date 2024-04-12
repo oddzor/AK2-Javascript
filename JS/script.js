@@ -60,22 +60,6 @@ function addCrypto(crypto) {
   listElement.appendChild(listTemplate);
 }
 
-// function cryptoInformationMain(cryptoData) {
-//   const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
-//   const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
-
-//   listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
-//   listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
-//   listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-//   listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
-//   listTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
-//     document.getElementById("main__list__element").style.display = "none";
-//     document.querySelector(".crypto__additional__info").style.display = "block";
-//     cryptoInformationMain(crypto);
-//   });
-///////////////////////////////////////////////////////////////////////////-------HVA GJØR DENNE?
-//   listElement.appendChild(listTemplate);
-// }
 
 //Listen for click event on returnbutton, then if button is clicked return to index.html
 
