@@ -16,8 +16,44 @@
   margin-inline: 2rem 1rem;
 }
 
+.crypto__item {
+  display: flex;
+  align-items: center;
+}
+
 .list__template__info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.display-chosen-crypto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+}
+
+.crypto-icon-main {
+  display: flex;
+  justify-content: center;
+}
+
+.crypto-icon-main > img {
+  width: 100px;
+}
+
+.crypto__additional__info {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 350px;
+  padding: 15px;
+
+  background-color: white;
+}
+
+.token-address {
+  display: block;
+  font-size: 0.8rem;
 }

@@ -99,59 +99,12 @@ window.addEventListener("load", () => {
 const goToWatchListButton = document.getElementById("go-to-watchlist-button");
 goToWatchListButton.addEventListener("click", goToWatchList);
 
-
 // function to make the gotowatchlistbutton, take the user to list.html
 
 function goToWatchList() {
   const url = "list.html";
   localStorage.setItem("goToWatchListClicked", "true");
   window.location.href = url;
-}
-
-// Funksjon for å vise api data på respektive id's i html
-function cryptoInformationMain(cryptoData) {
-  // Display information about the crypto item
-  const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
-  const rankElement = document.getElementById("crypto__rank__main");
-  const nameElement = document.getElementById("crypto__name__main");
-  const symbolElement = document.getElementById("crypto__symbol__main");
-  const priceElement = document.getElementById("crypto__price__main");
-  const change1hElement = document.getElementById("crypto__change1h");
-  const change24hElement = document.getElementById("crypto__change24h");
-  const change1dElement = document.getElementById("crypto__change1d");
-  const marketcapElement = document.getElementById("crypto__marketcap");
-  const volume24hElement = document.getElementById("crypto__volume24h");
-  const csupplyElement = document.getElementById("crypto__csupply");
-  const tsupplyElement = document.getElementById("crypto__tsupply");
-  const msupplyElement = document.getElementById("crypto__msupply");
-
-  // Set the content of HTML elements with crypto data
-  rankElement.innerHTML = "Rank: " + cryptoData.rank;
-  nameElement.innerHTML = "Name: " + cryptoData.name;
-  symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
-  priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
-  change1hElement.innerHTML = "Percentage Change 1h: " + cryptoData.percent_change_1h;
-  change24hElement.innerHTML = "Percentage Change 24h: " + cryptoData.percent_change_24h;
-  change1dElement.innerHTML = "Percentage Change 7d: " + cryptoData.percent_change_7d;
-  marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
-  volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
-  csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
-  tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
-  msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
-
-  // Detailed console log properties of specific cryptoData
-  console.log(
-    "%cCrypto Item: " + cryptoData.name, // "%c" gir mulighet til å style spesifikk string i dette utgangspunketet cryptoDatanavn i console
-    "font-size: 18px; font-weight: bold; color: orange;" //Uthevning og farge på utvalgt coin navn til console
-  );
-  console.log("Crypto item properties:", cryptoData); // logger properties til cryptoData
-
-  //
-
-  const cryptoAddress =
-    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
-  document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
-  fetchAndDisplayCryptoIcon(cryptoData.symbol);
 }
 
 // Adds elements to watchlist by utilizing localstorage
@@ -200,18 +153,68 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     if (iconElement) {
       iconElement.src = imageUrl;
     } else {
-      const imgElement = document.createElement("img");
-      imgElement.src = imageUrl;
-      document.getElementById("crypto__icon__main").appendChild(imgElement);
+      console.error("Image element not found in crypto__icon__main.");
     }
   } catch (error) {
     console.error("No icon for this crypto in database:", error);
   }
 }
 
+// Funksjon for å vise api data på respektive id's i html
+function cryptoInformationMain(cryptoData) {
+  // Display information about the crypto item
+  const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
+  const rankElement = document.getElementById("crypto__rank__main");
+  const nameElement = document.getElementById("crypto__name__main");
+  const symbolElement = document.getElementById("crypto__symbol__main");
+  const priceElement = document.getElementById("crypto__price__main");
+  const change1hElement = document.getElementById("crypto__change1h");
+  const change24hElement = document.getElementById("crypto__change24h");
+  const change1dElement = document.getElementById("crypto__change1d");
+  const marketcapElement = document.getElementById("crypto__marketcap");
+  const volume24hElement = document.getElementById("crypto__volume24h");
+  const csupplyElement = document.getElementById("crypto__csupply");
+  const tsupplyElement = document.getElementById("crypto__tsupply");
+  const msupplyElement = document.getElementById("crypto__msupply");
+
+  // Set the content of HTML elements with crypto data
+  rankElement.innerHTML = "Rank: " + cryptoData.rank;
+  nameElement.innerHTML = "Name: " + cryptoData.name;
+  symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
+  priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
+  change1hElement.innerHTML = "Percentage Change 1h: " + cryptoData.percent_change_1h;
+  change24hElement.innerHTML = "Percentage Change 24h: " + cryptoData.percent_change_24h;
+  change1dElement.innerHTML = "Percentage Change 7d: " + cryptoData.percent_change_7d;
+  marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
+  volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
+  csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
+  tsupplyElement.innerHTML = "Total Supply: " + cryptoData.tsupply;
+  msupplyElement.innerHTML = "Max Supply: " + cryptoData.msupply;
+
+  //apply styling t the crypto icon main to serve as placeholder for the cryptoIcon
+
+  const cryptoIconMain = document.getElementById("crypto__icon__main");
+  cryptoIconMain.style.width = "auto";
+  cryptoIconMain.style.height = "100px";
+  cryptoIconMain.style.marginBottom = "10px";
+
+  // Detailed console log properties of specific cryptoData
+  console.log(
+    "%cCrypto Item: " + cryptoData.name, // "%c" gir mulighet til å style spesifikk string i dette utgangspunketet cryptoDatanavn i console
+    "font-size: 18px; font-weight: bold; color: orange;" //Uthevning og farge på utvalgt coin navn til console
+  );
+  console.log("Crypto item properties:", cryptoData); // logger properties til cryptoData
+
+  const cryptoAddress =
+    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
+  document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
+
+  //Fetch and display cryptoIcon
+  fetchAndDisplayCryptoIcon(cryptoData.symbol);
+}
+
 // An array of objects containing symbols and corresponding adresses
 // used to match adresses with symbols for their respective cryptoItem
-
 const cryptoAddressList = [
   { symbol: "BTC", address: "0x321162Cd933E2Be498Cd2267a90534A804051b11" },
   { symbol: "ETH", address: "0xa2E3356610840701BDf5611a53974510Ae27E2e1" },

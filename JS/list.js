@@ -28,7 +28,7 @@ function displaySavedCryptoData() {
 
       //create a remove button for each lsit element
       const removeButton = document.createElement("button");
-      removeButton.textContent = "Remove";
+      removeButton.textContent = "X";
       removeButton.addEventListener("click", () => {
         //remove item from local storage
         localStorage.removeItem(key);
