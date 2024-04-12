@@ -121,8 +121,9 @@ document.getElementById("add-to-watchlist").addEventListener("click", function (
       .getElementById("crypto__change24h")
       .textContent.replace("percent_change24h: ", ""),
   };
-  const name = cryptoData.name.replace(/ /g, "_");
-  const key = `watchlist_${name}`;
+
+  const rank = cryptoData.name;
+  const key = `watchlist_${rank}`;
 
   localStorage.setItem(key, JSON.stringify(cryptoData));
 
@@ -192,9 +193,12 @@ function cryptoInformationMain(cryptoData) {
   nameElement.innerHTML = "Name: " + cryptoData.name;
   symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
   priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
-  change1hElement.innerHTML = "Percentage Change 1h: <span class=value>" + cryptoData.percent_change_1h + "</span>"; // Span for easier styling with priceColor()
-  change24hElement.innerHTML = "Percentage Change 24h: <span class=value>" + cryptoData.percent_change_24h + "</span>";
-  change1dElement.innerHTML = "Percentage Change 7d: <span class=value>" + cryptoData.percent_change_7d+ "</span>";
+  change1hElement.innerHTML =
+    "Percentage Change 1h: <span class=value>" + cryptoData.percent_change_1h + "</span>"; // Span for easier styling with priceColor()
+  change24hElement.innerHTML =
+    "Percentage Change 24h: <span class=value>" + cryptoData.percent_change_24h + "</span>";
+  change1dElement.innerHTML =
+    "Percentage Change 7d: <span class=value>" + cryptoData.percent_change_7d + "</span>";
   marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
   volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
   csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
@@ -227,20 +231,20 @@ function cryptoInformationMain(cryptoData) {
 // Function to adjust text color on price change data based on increase/decrease or no change.
 
 function priceColor() {
-  const changeElements = ['crypto__change1h', 'crypto__change24h', 'crypto__change1d'];
+  const changeElements = ["crypto__change1h", "crypto__change24h", "crypto__change1d"];
 
   changeElements.forEach((elementId) => {
     const element = document.getElementById(elementId);
     if (element) {
-      const valueSpan = element.querySelector('.value');
+      const valueSpan = element.querySelector(".value");
       if (valueSpan) {
-        const value = parseFloat(valueSpan.innerText); 
+        const value = parseFloat(valueSpan.innerText);
         if (value > 0) {
-          valueSpan.style.color = 'green';
+          valueSpan.style.color = "green";
         } else if (value < 0) {
-          valueSpan.style.color = 'red';
+          valueSpan.style.color = "red";
         } else {
-          valueSpan.style.color = 'black';
+          valueSpan.style.color = "black";
         }
       }
     }
