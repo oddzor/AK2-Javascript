@@ -71,6 +71,7 @@ function displaySavedCryptoData(sortFunction) {
       showPopup(`${cryptoData.name} has been removed from your watchlist.`);
     });
 
+    // creates elements for each cryptodata.attribute
     listItem.textContent = `${cryptoData.rank}. ${cryptoData.name}. (${cryptoData.symbol}). $${cryptoData.price_usd}. ${cryptoData.percentage_change24h}`;
 
     //append the remove button to the list item
