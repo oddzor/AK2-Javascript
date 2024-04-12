@@ -133,11 +133,14 @@ Watchlist data will remain persisted in local storage, so when closing and openi
 
 ```
 
-The last portion of this fetch URL is replaced by a crypto token address that has been hardcoded into an array, the array contains a "symbol" and an "address", symbol is cross referenced with API data symbol as they are identical per token,then address is retrieved from the array to allow the API request to be sent.
+The last portion of this fetch URL is replaced by a crypto token address that has been hardcoded into an array,
+the array contains a "symbol" and an "address", symbol is cross referenced with API data symbol as they are identical per token,
+then address is retrieved from the array to allow the API request to be sent.
 ```
 ```
 
-As shown in the array excerpt below, symbol from the API data is matched with symbol in the array data, then address is retrieved and populated into the image fetch url.
+As shown in the array excerpt below, symbol from the API data is matched with symbol in the array data,
+then address is retrieved and populated into the image fetch url.
 
 ```
 
@@ -170,7 +173,8 @@ Then the imageURL from the API data is directly used as the image src for the co
 
 ```
 
-After selecting a token from the list, a button on the additional information page will allow you to store the data for this specific token into a watchlist.
+After selecting a token from the list, a button on the additional information page will
+allow you to store the data for this specific token into a watchlist.
 ```
 
 ``  document.getElementById("add-to-watchlist").addEventListener("click", function () {  ``
