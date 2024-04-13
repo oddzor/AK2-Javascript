@@ -8,7 +8,26 @@ document.addEventListener("onload", function () {
 let cryptoDataArray = [];
 
 document.getElementById("filter-inputs").addEventListener("change", function () {
-  getCryptoData(this.value);
+  let limit = parseInt(this.value);
+
+  // set limit to maximum of 100
+  if (limit > 100) {
+    limit = 100;
+  }
+
+  // set limit to maximum of 1
+  if (limit < 1) {
+    limit = 1;
+  }
+
+  // update the value to max/min limit if given input is higher/lower (NaN if not a number)
+  this.value = limit;
+
+  //log limit when clicked
+  console.log("Limit set to: ", limit);
+
+  // Fetch cryptodata with new limit
+  getCryptoData(limit);
 });
 
 //Handles fetch for apidata og error handling
