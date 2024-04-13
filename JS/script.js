@@ -57,7 +57,7 @@ function addCrypto(crypto) {
   clonedTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
   clonedTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
   clonedTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-  clonedTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+  clonedTemplate.querySelector(".crypto__price__index").textContent = `$${crypto.price_usd}`;
 
   // Add click event listener when clicked
   clonedTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
