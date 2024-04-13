@@ -74,6 +74,11 @@ function addCrypto(crypto) {
 document.getElementById("filter-inputs").addEventListener("change", function () {
   let limit = parseInt(this.value);
 
+  // check if parsed limit is NaN, if so, set it to 1
+  if (isNaN(limit)) {
+    limit = 1;
+  }
+
   // set limit to maximum of 100
   if (limit > 100) {
     limit = 100;
@@ -89,6 +94,12 @@ document.getElementById("filter-inputs").addEventListener("change", function () 
 
   //log limit when clicked
   console.log("Limit set to: ", limit);
+
+  //remove placeholder on first input
+  if (!this.placeholderRemoved) {
+    this.removeAttribute("placeholder");
+    this.placeholderRemoved = true;
+  }
 
   // Fetch cryptodata with new limit
   getCryptoData(limit);

@@ -6,6 +6,31 @@
   height: 100%;
 }
 
+.input-description {
+  text-align: center;
+  color: white;
+  font-size: 1.3rem;
+  width: 300px;
+
+  background-color: #202020;
+  border: 2px solid orange;
+}
+
+.filter-inputs {
+  text-align: center;
+  font-size: 2rem;
+  width: 300px;
+  height: 50px;
+  color: orange;
+
+  background-color: #202020;
+  border: 2px solid orange;
+}
+
+.filter-inputs::placeholder {
+  color: orange; /* Change the color of the placeholder text */
+}
+
 .crypto__list__wrapper {
   display: flex;
   flex-direction: row;
