@@ -8,13 +8,18 @@
     <link href="./images/favicon.ico" rel="icon" type="image/x-icon" />
     <title>CRYPSTAD AKADEMIET</title>
   </head>
-  <body onload="getCryptoData(40)">
+  <body onload="getCryptoData(20)">
     <div class="main__page__wrapper">
       <header>
         <h1>CRYPSTAD AKADEMIET</h1>
         <nav class="dynamic-nav" id="dynamic-nav"></nav>
       </header>
-      <input id="filter-inputs" />
+
+      <p class="input-description" id="input-description">
+        Edit box below to change amount of displayed elements
+      </p>
+      <input class="filter-inputs" id="filter-inputs" placeholder="20" />
+
       <div id="main__list__element">
         <div class="list__template__info">
           <div id="list__template__rank">RANK</div>

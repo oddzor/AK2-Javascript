@@ -57,12 +57,13 @@ function addCrypto(crypto) {
   clonedTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
   clonedTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
   clonedTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-  clonedTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+  clonedTemplate.querySelector(".crypto__price__index").textContent = `$${crypto.price_usd}`;
 
   // Add click event listener when clicked
   clonedTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
     document.getElementById("main__list__element").style.display = "none";
     document.getElementById("filter-inputs").style.display = "none";
+    document.getElementById("input-description").style.display = "none";
     document.querySelector(".crypto__additional__info").style.display = "block";
     cryptoInformationMain(crypto);
   });
@@ -73,6 +74,11 @@ function addCrypto(crypto) {
 // Adding eventlistener for filter-input and handling of input
 document.getElementById("filter-inputs").addEventListener("change", function () {
   let limit = parseInt(this.value);
+
+  // check if parsed limit is NaN, if so, set it to 1
+  if (isNaN(limit)) {
+    limit = 1;
+  }
 
   // set limit to maximum of 100
   if (limit > 100) {
@@ -89,6 +95,12 @@ document.getElementById("filter-inputs").addEventListener("change", function () 
 
   //log limit when clicked
   console.log("Limit set to: ", limit);
+
+  //remove placeholder on first input
+  if (!this.placeholderRemoved) {
+    this.removeAttribute("placeholder");
+    this.placeholderRemoved = true;
+  }
 
   // Fetch cryptodata with new limit
   getCryptoData(limit);
