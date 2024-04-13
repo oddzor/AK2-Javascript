@@ -54,57 +54,67 @@ function addCrypto(crypto) {
 
   const clonedTemplate = listTemplate.cloneNode(true);
 
-  clonedTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
-  clonedTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
-  clonedTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-  clonedTemplate.querySelector(".crypto__price__index").textContent = `$${crypto.price_usd}`;
+  clonedTemplate.querySelector(".crypto__symbol__index").textContent =
+    crypto.symbol;
+  clonedTemplate.querySelector(".crypto__name__index").textContent =
+    crypto.name;
+  clonedTemplate.querySelector(".crypto__rank__index").textContent =
+    crypto.rank;
+  clonedTemplate.querySelector(
+    ".crypto__price__index"
+  ).textContent = `$${crypto.price_usd}`;
 
   // Add click event listener when clicked
-  clonedTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
-    document.getElementById("main__list__element").style.display = "none";
-    document.getElementById("filter-inputs").style.display = "none";
-    document.getElementById("input-description").style.display = "none";
-    document.querySelector(".crypto__additional__info").style.display = "block";
-    cryptoInformationMain(crypto);
-  });
+  clonedTemplate
+    .querySelector(".crypto__list__wrapper")
+    .addEventListener("click", () => {
+      document.getElementById("main__list__element").style.display = "none";
+      document.getElementById("filter-inputs").style.display = "none";
+      document.getElementById("input-description").style.display = "none";
+      document.querySelector(".crypto__additional__info").style.display =
+        "block";
+      cryptoInformationMain(crypto);
+    });
 
   listElement.appendChild(clonedTemplate);
 }
 
 // Adding eventlistener for filter-input and handling of input
-document.getElementById("filter-inputs").addEventListener("change", function () {
-  let limit = parseInt(this.value);
+document
+  .getElementById("filter-inputs")
+  .addEventListener("change", function () {
+    let limit = parseInt(this.value);
 
-  // check if parsed limit is NaN, if so, set it to 1
-  if (isNaN(limit)) {
-    limit = 1;
-  }
+    // check if parsed limit is NaN, if so, set it to 1
+    if (isNaN(limit)) {
+      limit = 1;
+    }
 
-  // set limit to maximum of 100
-  if (limit > 100) {
-    limit = 100;
-  }
+    // set limit to maximum of 100
+    if (limit > 100) {
+      limit = 100;
+    }
 
-  // set limit to maximum of 1
-  if (limit < 1) {
-    limit = 1;
-  }
+    // set limit to maximum of 1
+    if (limit < 1) {
+      limit = 1;
+    }
 
-  // update the value to max/min limit if given input is higher/lower (NaN if not a number)
-  this.value = limit;
+    // update the value to max/min limit if given input is higher/lower (NaN if not a number)
+    this.value = limit;
 
-  //log limit when clicked
-  console.log("Limit set to: ", limit);
+    //log limit when clicked
+    console.log("Limit set to: ", limit);
 
-  //remove placeholder on first input
-  if (!this.placeholderRemoved) {
-    this.removeAttribute("placeholder");
-    this.placeholderRemoved = true;
-  }
+    //remove placeholder on first input
+    if (!this.placeholderRemoved) {
+      this.removeAttribute("placeholder");
+      this.placeholderRemoved = true;
+    }
 
-  // Fetch cryptodata with new limit
-  getCryptoData(limit);
-});
+    // Fetch cryptodata with new limit
+    getCryptoData(limit);
+  });
 
 //Listen for click event on returnbutton, then if button is clicked return to index.html
 
@@ -138,31 +148,39 @@ function goToWatchList() {
 
 // Adds elements to watchlist by utilizing localstorage
 
-document.getElementById("add-to-watchlist").addEventListener("click", function () {
-  const cryptoData = {
-    rank: document.getElementById("crypto__rank__main").textContent.replace("Rank: ", ""),
-    name: document.getElementById("crypto__name__main").textContent.replace("Name: ", ""),
-    symbol: document.getElementById("crypto__symbol__main").textContent.replace("Symbol: ", ""),
-    price_usd: document
-      .getElementById("crypto__price__main")
-      .textContent.replace("Price USD: ", ""),
-    percentage_change24h: document
-      .getElementById("crypto__change24h")
-      .textContent.replace("percent_change24h: ", ""),
-  };
+document
+  .getElementById("add-to-watchlist")
+  .addEventListener("click", function () {
+    const cryptoData = {
+      rank: document
+        .getElementById("crypto__rank__main")
+        .textContent.replace("Rank: ", ""),
+      name: document
+        .getElementById("crypto__name__main")
+        .textContent.replace("Name: ", ""),
+      symbol: document
+        .getElementById("crypto__symbol__main")
+        .textContent.replace("Symbol: ", ""),
+      price_usd: document
+        .getElementById("crypto__price__main")
+        .textContent.replace("Price USD: ", ""),
+      percentage_change24h: document
+        .getElementById("crypto__change24h")
+        .textContent.replace("percent_change24h: ", ""),
+    };
 
-  const rank = cryptoData.name;
-  const key = `watchlist_${rank}`;
+    const rank = cryptoData.name;
+    const key = `watchlist_${rank}`;
 
-  localStorage.setItem(key, JSON.stringify(cryptoData));
+    localStorage.setItem(key, JSON.stringify(cryptoData));
 
-  // log local storage to check if the item was added correctly
-  console.log("Local Storage after adding item:", localStorage);
+    // log local storage to check if the item was added correctly
+    console.log("Local Storage after adding item:", localStorage);
 
-  //show popup
-  showPopup(`${cryptoData.name} has been added to your watchlist!`);
-  //
-});
+    //show popup
+    showPopup(`${cryptoData.name} has been added to your watchlist!`);
+    //
+  });
 
 // funksjon for å hente ikon, og displaye ikon som matcher symbol
 async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
@@ -188,7 +206,9 @@ async function fetchAndDisplayCryptoIcon(cryptoSymbol) {
     const data = await response.json();
     const imageUrl = data[0].logoURI;
 
-    const iconElement = document.getElementById("crypto__icon__main").querySelector("img");
+    const iconElement = document
+      .getElementById("crypto__icon__main")
+      .querySelector("img");
 
     if (iconElement) {
       iconElement.src = imageUrl;
@@ -222,11 +242,17 @@ function cryptoInformationMain(cryptoData) {
   symbolElement.innerHTML = "Symbol: " + cryptoData.symbol;
   priceElement.innerHTML = "Price USD: " + cryptoData.price_usd;
   change1hElement.innerHTML =
-    "Percentage Change 1h: <span class=value>" + cryptoData.percent_change_1h + "</span>"; // Span for easier styling with priceColor()
+    "Percentage Change 1h: <span class=value>" +
+    cryptoData.percent_change_1h +
+    "</span>"; // Span for easier styling with priceColor()
   change24hElement.innerHTML =
-    "Percentage Change 24h: <span class=value>" + cryptoData.percent_change_24h + "</span>";
+    "Percentage Change 24h: <span class=value>" +
+    cryptoData.percent_change_24h +
+    "</span>";
   change1dElement.innerHTML =
-    "Percentage Change 7d: <span class=value>" + cryptoData.percent_change_7d + "</span>";
+    "Percentage Change 7d: <span class=value>" +
+    cryptoData.percent_change_7d +
+    "</span>";
   marketcapElement.innerHTML = "Market Cap USD: " + cryptoData.market_cap_usd;
   volume24hElement.innerHTML = "Volume 24h: " + cryptoData.volume24;
   csupplyElement.innerHTML = "Current Supply: " + cryptoData.csupply;
@@ -249,8 +275,10 @@ function cryptoInformationMain(cryptoData) {
   console.log("Crypto item properties:", cryptoData); // logger properties til cryptoData
 
   const cryptoAddress =
-    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address || "Address not found";
-  document.getElementById("crypto__address").textContent = "Token Address: " + cryptoAddress;
+    cryptoAddressList.find((c) => c.symbol === cryptoData.symbol)?.address ||
+    "Address not found";
+  document.getElementById("crypto__address").textContent =
+    "Token Address: " + cryptoAddress;
 
   //Fetch and display cryptoIcon
   fetchAndDisplayCryptoIcon(cryptoData.symbol);
@@ -259,7 +287,11 @@ function cryptoInformationMain(cryptoData) {
 // Function to adjust text color on price change data based on increase/decrease or no change.
 
 function priceColor() {
-  const changeElements = ["crypto__change1h", "crypto__change24h", "crypto__change1d"];
+  const changeElements = [
+    "crypto__change1h",
+    "crypto__change24h",
+    "crypto__change1d",
+  ];
 
   changeElements.forEach((elementId) => {
     const element = document.getElementById(elementId);
