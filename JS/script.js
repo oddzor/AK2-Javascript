@@ -1,19 +1,25 @@
 // Pre-loading DOM
-
-document.addEventListener("DOMContentLoaded", function () {
-  getCryptoData();
+/*
+document.addEventListener("onload", function () {
+  getCryptoData(3);
 });
-
+*/
 // Array for data from api
 let cryptoDataArray = [];
 
 //Handles fetch for apidata og error handling
-async function getCryptoData() {
-  const apiUrl = "https://api.coinlore.net/api/tickers/?start=0&limit=100";
+async function getCryptoData(limitByRequest) {
+  const apiUrl = `https://api.coinlore.net/api/tickers/?start=0&limit=${limitByRequest}`;
 
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
+
+    // Clear existing crypto data elements
+    document.getElementById("main__list__element").innerHTML = "";
+
+    //Clear cryptoDataArray before adding new data
+    cryptoDataArray = [];
 
     // store the retrieved item in an outer array for easier readability in console
     cryptoDataArray.push(data.data);
@@ -39,27 +45,54 @@ async function getCryptoData() {
   }
 }
 
-// Populating elements on index.html
+// Defining template outside the main__list__element
+const listTemplate = document.getElementById("main__list__template").content;
 
+// Populating elements on index.html
 function addCrypto(crypto) {
   const listElement = document.getElementById("main__list__element");
 
-  const listTemplate = document.getElementById("main__list__template").content.cloneNode(true);
+  const clonedTemplate = listTemplate.cloneNode(true);
 
-  listTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
-  listTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
-  listTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
-  listTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
+  clonedTemplate.querySelector(".crypto__symbol__index").textContent = crypto.symbol;
+  clonedTemplate.querySelector(".crypto__name__index").textContent = crypto.name;
+  clonedTemplate.querySelector(".crypto__rank__index").textContent = crypto.rank;
+  clonedTemplate.querySelector(".crypto__price__index").textContent = crypto.price_usd;
 
   // Add click event listener when clicked
-  listTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
+  clonedTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
     document.getElementById("main__list__element").style.display = "none";
+    document.getElementById("filter-inputs").style.display = "none";
     document.querySelector(".crypto__additional__info").style.display = "block";
     cryptoInformationMain(crypto);
   });
-  listElement.appendChild(listTemplate);
+
+  listElement.appendChild(clonedTemplate);
 }
 
+// Adding eventlistener for filter-input and handling of input
+document.getElementById("filter-inputs").addEventListener("change", function () {
+  let limit = parseInt(this.value);
+
+  // set limit to maximum of 100
+  if (limit > 100) {
+    limit = 100;
+  }
+
+  // set limit to maximum of 1
+  if (limit < 1) {
+    limit = 1;
+  }
+
+  // update the value to max/min limit if given input is higher/lower (NaN if not a number)
+  this.value = limit;
+
+  //log limit when clicked
+  console.log("Limit set to: ", limit);
+
+  // Fetch cryptodata with new limit
+  getCryptoData(limit);
+});
 
 //Listen for click event on returnbutton, then if button is clicked return to index.html
 
