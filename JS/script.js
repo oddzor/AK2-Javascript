@@ -63,6 +63,7 @@ function addCrypto(crypto) {
   clonedTemplate.querySelector(".crypto__list__wrapper").addEventListener("click", () => {
     document.getElementById("main__list__element").style.display = "none";
     document.getElementById("filter-inputs").style.display = "none";
+    document.getElementById("input-description").style.display = "none";
     document.querySelector(".crypto__additional__info").style.display = "block";
     cryptoInformationMain(crypto);
   });
