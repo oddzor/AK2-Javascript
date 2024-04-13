@@ -8,12 +8,13 @@
     <link href="./images/favicon.ico" rel="icon" type="image/x-icon" />
     <title>CRYPSTAD AKADEMIET</title>
   </head>
-  <body>
+  <body onload="getCryptoData(40)">
     <div class="main__page__wrapper">
       <header>
         <h1>CRYPSTAD AKADEMIET</h1>
         <nav class="dynamic-nav" id="dynamic-nav"></nav>
       </header>
+      <input id="filter-inputs" />
       <div id="main__list__element">
         <div class="list__template__info">
           <div id="list__template__rank">RANK</div>
@@ -47,10 +48,10 @@
           <div id="crypto__msupply"></div>
           <div class="token-address" id="crypto__address"></div>
           <div class="crypto__additional__button__wrapper">
-          <button id="add-to-watchlist">Add to Watchlist</button>
-          <button id="return-button">Return</button>
-          <button id="go-to-watchlist-button">Go To Watchlist</button>
-        </div>
+            <button id="add-to-watchlist">Add to Watchlist</button>
+            <button id="return-button">Return</button>
+            <button id="go-to-watchlist-button">Go To Watchlist</button>
+          </div>
         </div>
       </div>
     </div>
