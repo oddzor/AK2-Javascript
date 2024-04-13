@@ -1,9 +1,12 @@
 #watchlist-wrapper h1 {
   display: flex;
   justify-content: center;
-  color: #F27121;
+  color: #f27121;
   font-size: 2.5rem;
-  
+}
+
+h2 {
+margin-bottom: 30px;
 }
 
 #watchlist-wrapper ul {
@@ -11,32 +14,32 @@
   font-size: 2rem;
 }
 
-
 .list-container {
-display: flex;
-flex-direction: column;
-position: relative;
-top: 60px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 60px;
 }
 
 .button-container {
-display: flex;
-justify-content: space-evenly;
-margin: 5px;
-border-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+  border-radius: 5px;
 }
 
 .popup {
-width: 350px;
-position: absolute;
-top: 250px;
-left: 50%;
-transform: translateX(-50%);
-background-color: #ffffff;
-color: #333333;
-padding: 10px 20px;
-border-radius: 5px;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+  position: absolute;
+  top: 260px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  color: #333333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 #saved-crypto-container {
@@ -45,7 +48,6 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin: 10px;
   color: orange;
   font-size: 1rem;
-
 }
 
 #saved-crypto-container > li {
@@ -62,22 +64,21 @@ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   background: none;
 }
 
-#sortRankButton, #sortPriceButton, #sortNameButton {
+#sortRankButton,
+#sortPriceButton,
+#sortNameButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:#202020;
+  background-color: #202020;
   padding: 0.25rem;
   border: white 1.5px solid;
-  color:  #F27121;
+  color: #f27121;
   font-size: 1rem;
   border-radius: 0.25rem;
-
 }
 
 .sort-icon {
   height: 70%;
   margin-left: 1rem;
 }
-
-
