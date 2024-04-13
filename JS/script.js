@@ -7,29 +7,6 @@ document.addEventListener("onload", function () {
 // Array for data from api
 let cryptoDataArray = [];
 
-document.getElementById("filter-inputs").addEventListener("change", function () {
-  let limit = parseInt(this.value);
-
-  // set limit to maximum of 100
-  if (limit > 100) {
-    limit = 100;
-  }
-
-  // set limit to maximum of 1
-  if (limit < 1) {
-    limit = 1;
-  }
-
-  // update the value to max/min limit if given input is higher/lower (NaN if not a number)
-  this.value = limit;
-
-  //log limit when clicked
-  console.log("Limit set to: ", limit);
-
-  // Fetch cryptodata with new limit
-  getCryptoData(limit);
-});
-
 //Handles fetch for apidata og error handling
 async function getCryptoData(limitByRequest) {
   const apiUrl = `https://api.coinlore.net/api/tickers/?start=0&limit=${limitByRequest}`;
@@ -88,8 +65,33 @@ function addCrypto(crypto) {
     document.querySelector(".crypto__additional__info").style.display = "block";
     cryptoInformationMain(crypto);
   });
+
   listElement.appendChild(clonedTemplate);
 }
+
+// Adding eventlistener for filter-input and handling of input
+document.getElementById("filter-inputs").addEventListener("change", function () {
+  let limit = parseInt(this.value);
+
+  // set limit to maximum of 100
+  if (limit > 100) {
+    limit = 100;
+  }
+
+  // set limit to maximum of 1
+  if (limit < 1) {
+    limit = 1;
+  }
+
+  // update the value to max/min limit if given input is higher/lower (NaN if not a number)
+  this.value = limit;
+
+  //log limit when clicked
+  console.log("Limit set to: ", limit);
+
+  // Fetch cryptodata with new limit
+  getCryptoData(limit);
+});
 
 //Listen for click event on returnbutton, then if button is clicked return to index.html
 
